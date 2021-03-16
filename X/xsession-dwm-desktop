@@ -26,7 +26,7 @@ if [ -x /usr/bin/pnmixer ]; then
     pnmixer &
 fi
 
-~/shell_scripts/dwm-status-bar &
+~/scripts/dwm-status-bar &
 
 if [[ -e ~/.fehbg ]]; then
     bash ~/.fehbg &
