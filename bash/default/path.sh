@@ -1,30 +1,24 @@
+localdir=$HOME/local
 
-# local installs
-#localdir=~/local
-#if [[ -e "$localdir" ]]; then
-	
-	# Our local installs get precedence
-#	prepend_path PATH ${localdir}/bin
-#    prepend_path C_INCLUDE_PATH $localdir/include
-#    prepend_path CPATH $localdir/include
-#	prepend_path LD_LIBRARY_PATH ${localdir}/lib
-#	prepend_path LIBRARY_PATH ${localdir}/lib
+if [[ -d $localdir/bin ]]; then
+    prepend_path PATH ${localdir}/bin
+fi
 
-#fi
+if [[ -d $localdir/lib ]]; then
+    prepend_path LD_LIBRARY_PATH ${localdir}/lib
+    prepend_path LIBRARY_PATH    ${localdir}/lib
+fi
 
+if [[ -d $localdir/include ]]; then
+    prepend_path C_INCLUDE_PATH  ${localdir}/include
+    prepend_path CPATH           ${localdir}/include
+fi
 
-#prepend_path PATH ~/shell_scripts
-#prepend_path PATH ~/perllib
-#prepend_path PATH ~/python/bin
-#prepend_path PYTHONPATH ~/python
+if [[ -d ${HOME}/scripts ]]; then
+    prepend_path PATH $HOME/scripts
+fi
 
-#append_path PATH /sbin
-#append_path PATH /usr/sbin
-
-#export PATH
-#export C_INCLUDE_PATH
-#export CPATH
-#export LD_LIBRARY_PATH
-#export LIBRARY_PATH
-#export PYTHONPATH
-
+if [[ -e $ANACONDA_DIR ]]; then
+    export ANACONDA_DIR=$HOME/miniconda3
+    prepend_path PATH ${ANACONDA_DIR}/bin
+fi
