@@ -79,6 +79,65 @@ Host astro
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
 
+Host lsst-login*
+   # if your account on your local workstation/laptop does not match your LSST
+   # username, indicate the latter should be used; substitute your own NCSA
+   # username
+
+   User esheldon
+
+   # allow use of a Kerberos ticket on your local machine for auth to LSST machines
+   GSSAPIAuthentication yes
+
+   # prefer Kerberos ticket auth, amongst other possibilities (order/include
+   # others as desired)
+   PreferredAuthentications gssapi-with-mic,keyboard-interactive,password
+
+   # forward your local Kerberos ticket to the login node if you need to
+   # continue to another LSST server after the login
+   GSSAPIDelegateCredentials yes
+
+   # configure OpenSSH Control Master "multiplexing" (to allow reuse of an
+   # initial connection)
+
+   ControlMaster auto
+   ControlPath ~/.ssh/cm_socket_%r@%h:%p
+   ControlPersist 5m
+
+# Define aliases onto full hostnames for each login node
+Host lsst-login01
+   HostName lsst-login01.ncsa.illinois.edu
+Host lsst-login02
+   HostName lsst-login02.ncsa.illinois.edu
+Host lsst-login03
+   HostName lsst-login03.ncsa.illinois.edu
+
+# Define an alias and config for an internal node, which can only be reached through a login node
+Host lsst-devl01
+
+   HostName lsst-devl01.ncsa.illinois.edu
+
+   # you may need to specify your NCSA username again
+   User esheldon
+
+   # when connecting to this internal host, tunnel/jump through a login node
+   # (using the alias you defined above)
+   ProxyJump lsst-login01
+
+   # if you want to use your local Kerberos ticket to authenticate on the
+   # interior node, configure that:
+   GSSAPIAuthentication yes
+   PreferredAuthentications gssapi-with-mic
+
+   # if the internal node is a batch submit node where you might want a
+   # Kerberos ticket (e.g., to submit jobs to HTCondor), you can choose to
+   # forward your credentials:
+   GSSAPIDelegateCredentials yes
+
+   # if you need to configure port forwarding to the internal node, you can do that here;
+   # substitute your actual port number
+   # DynamicForward yourportnumber
+
 # Created by /usr/bin/cluster-env (1.2)
 Host *
    IdentityFile ~/.ssh/identity
