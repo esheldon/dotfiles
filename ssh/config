@@ -113,7 +113,7 @@ Host lsst-login03
    HostName lsst-login03.ncsa.illinois.edu
 
 # Define an alias and config for an internal node, which can only be reached through a login node
-Host lsst-devl01
+Host lsst-devl
 
    HostName lsst-devl01.ncsa.illinois.edu
 
