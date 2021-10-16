@@ -42,39 +42,10 @@ Host login.xsede.org
 
 	LocalForward localhost:2230 comet.sdsc.xsede.org:22
 
-
-# Set up aliases to point us to the ports and machines listed above
-# don't use their actual names, just in case we are on a machine local
-# to them in which case we don't need all this forwarding
-Host tastro
-	HostName localhost
-	Port 2224
-
-Host ttutti
-	HostName localhost
-	Port 2225
-
-Host tcomet
-    HostName localhost
-    Port 2230
-
-Host rgpu1
-	HostName localhost
-	Port 2226
-Host rgpu2
-	HostName localhost
-	Port 2227
-
-Host lgpu1
-	HostName localhost
-	Port 2228
-Host lgpu2
-	HostName localhost
-	Port 2229
-
 # new style, ssh version >= 7.4
 Host astro
-  Hostname astro.rcf.bnl.gov
+  # Hostname astro.rcf.bnl.gov
+  Hostname astro0103.rcf.bnl.gov
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
