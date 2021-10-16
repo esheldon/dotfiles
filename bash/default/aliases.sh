@@ -7,8 +7,8 @@ alias sattach='grabssh ; screen -DR'
 alias tattach='grabssh ; tmux a -d'
 alias fixssh='source $TMPDIR/fixssh'
 
-alias webfaction='f36enrwgolmi@72.167.71.145'
-alias tsohost='f36enrwgolmi@72.167.71.145'
+export webfaction='f36enrwgolmi@72.167.71.145'
+export tsohost='f36enrwgolmi@72.167.71.145'
 
 alias rssh='ssh esheldon@rssh.rhic.bnl.gov'
 
