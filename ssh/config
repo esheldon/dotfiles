@@ -49,6 +49,11 @@ Host astro
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
+Host astrowq
+  Hostname astro.rcf.bnl.gov
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
 
 Host lsst-login*
    # if your account on your local workstation/laptop does not match your LSST
