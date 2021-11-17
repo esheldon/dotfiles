@@ -50,7 +50,7 @@ Host astro
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
 Host astrowq
-  Hostname astro.rcf.bnl.gov
+  Hostname astro0010.rcf.bnl.gov
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
