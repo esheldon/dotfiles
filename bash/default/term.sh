@@ -54,3 +54,5 @@ fi
 
 unset PROMPT_COMMAND
 setp
+
+ulimit -n 4096
