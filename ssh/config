@@ -44,12 +44,16 @@ Host login.xsede.org
 
 # new style, ssh version >= 7.4
 Host astro
-  # Hostname astro.rcf.bnl.gov
-  Hostname astro0103.rcf.bnl.gov
+  Hostname astro0104.rcf.bnl.gov
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
 Host astrowq
+  Hostname astro0101.rcf.bnl.gov
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
+Host astro0101
   Hostname astro0101.rcf.bnl.gov
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
@@ -61,6 +65,11 @@ Host astro0102
 
 Host astro0103
   Hostname astro0103.rcf.bnl.gov
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
+Host astro0104
+  Hostname astro0104.rcf.bnl.gov
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
