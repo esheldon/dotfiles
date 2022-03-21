@@ -38,3 +38,5 @@ ignore =
     E131,
     # at least two spaces before inline comment
     E261
+    # lowercase
+    N803, N806
