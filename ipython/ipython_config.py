@@ -664,7 +664,7 @@ try:
 except:
     pass
 """
-for pkg in ['ngmix']:
+for pkg in ['ngmix', 'proplot as pplt']:
     optlines = optional_lines % pkg
     app.exec_lines.append(optlines)
 
