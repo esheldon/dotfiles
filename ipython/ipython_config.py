@@ -665,10 +665,11 @@ optional_lines="""
 try:
     import %s
 except:
+    print('could not import %s')
     pass
 """
 for pkg in ['ngmix', 'proplot as pplt']:
-    optlines = optional_lines % pkg
+    optlines = optional_lines % (pkg, pkg)
     app.exec_lines.append(optlines)
 
 # for python3
