@@ -648,8 +648,9 @@ from esutil.stat import get_stats, print_stats
 app.exec_lines.append(lines)
 
 lines="""
-import hickory
-from hickory import plot, plot_hist
+import espy.plotting
+from espy.plotting import plot
+from espy.plotting import plot_hist
 """
 app.exec_lines.append(lines)
 
