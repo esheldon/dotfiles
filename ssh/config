@@ -6,51 +6,12 @@ ServerAliveCountMax 1000
 GSSAPIAuthentication yes
 GSSAPIDelegateCredentials yes
 
-#ControlMaster auto
-#ControlPath /tmp/%r@%h:%p
-#ControlPersist yes
-
-# This section deals with port forwarding through gateways.  In all cases
-# we must first set up a connection through the gateway machine.  This 
-# might best done by ssh to the machine with -f to go to the background, 
-# although then one must grep through ps to kill it
-
 #
-# gateway for BNL
+# bnl machines
 #
 
-# This says we forward these ports through the gateway to the specified machine
-# Host rssh.rhic.bnl.gov
-# Host ssh.sdcc.bnl.gov
-
-# 	LocalForward localhost:2224 astro.rcf.bnl.gov:22
-# 	LocalForward localhost:2225 tutti.astro.bnl.gov:22
-
-
-Host ssh.bluegene.bnl.gov
-
-	LocalForward localhost:2226 gpu1.csc.bnl.gov:22
-	LocalForward localhost:2227 gpu2.csc.bnl.gov:22
-
-Host ssh.bluegene.bnl.local
-
-	LocalForward localhost:2228 gpu1.csc.bnl.gov:22
-	LocalForward localhost:2229 gpu2.csc.bnl.gov:22
-
-
-Host login.xsede.org
-
-	LocalForward localhost:2230 comet.sdsc.xsede.org:22
-
-# new style, ssh version >= 7.4
 Host astro
   Hostname astro0104.rcf.bnl.gov
-  PubkeyAcceptedKeyTypes +ssh-rsa
-  User esheldon
-  ProxyJump %r@ssh.sdcc.bnl.gov:22
-
-Host astrowq
-  Hostname astro0101.rcf.bnl.gov
   PubkeyAcceptedKeyTypes +ssh-rsa
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
@@ -79,68 +40,15 @@ Host astro0104
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
-Host lsst-login*
-   # if your account on your local workstation/laptop does not match your LSST
-   # username, indicate the latter should be used; substitute your own NCSA
-   # username
+#
+# usdf machines
+#
 
-   User esheldon
+# this is the main round robin login nodes, don't use these directly
+Host usdf-roundrobin
+  Hostname s3dflogin.slac.stanford.edu
 
-   # allow use of a Kerberos ticket on your local machine for auth to LSST machines
-   GSSAPIAuthentication yes
-
-   # prefer Kerberos ticket auth, amongst other possibilities (order/include
-   # others as desired)
-   PreferredAuthentications gssapi-with-mic,keyboard-interactive,password
-
-   # forward your local Kerberos ticket to the login node if you need to
-   # continue to another LSST server after the login
-   GSSAPIDelegateCredentials yes
-
-   # configure OpenSSH Control Master "multiplexing" (to allow reuse of an
-   # initial connection)
-
-   ControlMaster auto
-   ControlPath ~/.ssh/cm_socket_%r@%h:%p
-   ControlPersist 5m
-
-# Define aliases onto full hostnames for each login node
-Host lsst-login01
-   HostName lsst-login01.ncsa.illinois.edu
-Host lsst-login02
-   HostName lsst-login02.ncsa.illinois.edu
-Host lsst-login03
-   HostName lsst-login03.ncsa.illinois.edu
-
-# Define an alias and config for an internal node, which can only be reached through a login node
-Host lsst-devl
-
-   HostName lsst-devl01.ncsa.illinois.edu
-
-   # you may need to specify your NCSA username again
-   User esheldon
-
-   # when connecting to this internal host, tunnel/jump through a login node
-   # (using the alias you defined above)
-   ProxyJump lsst-login01
-
-   # if you want to use your local Kerberos ticket to authenticate on the
-   # interior node, configure that:
-   GSSAPIAuthentication yes
-   PreferredAuthentications gssapi-with-mic
-
-   # if the internal node is a batch submit node where you might want a
-   # Kerberos ticket (e.g., to submit jobs to HTCondor), you can choose to
-   # forward your credentials:
-   GSSAPIDelegateCredentials yes
-
-   # if you need to configure port forwarding to the internal node, you can do that here;
-   # substitute your actual port number
-   # DynamicForward yourportnumber
-
-# Created by /usr/bin/cluster-env (1.2)
-Host *
-   IdentityFile ~/.ssh/identity
-   IdentityFile ~/.ssh/id_rsa
-   IdentityFile ~/.ssh/id_dsa
-   IdentityFile ~/.ssh/nodes
+# rubin development nodes
+Host usdf
+  Hostname rubin-devl
+  ProxyJump usdf-roundrobin
