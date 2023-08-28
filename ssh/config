@@ -45,10 +45,20 @@ Host astro0104
 #
 
 # this is the main round robin login nodes, don't use these directly
-Host usdf-roundrobin
+Host usdf-login
   Hostname s3dflogin.slac.stanford.edu
 
-# rubin development nodes
+# rubin round robin development nodes
 Host usdf
   Hostname rubin-devl
-  ProxyJump usdf-roundrobin
+  ProxyJump usdf-login
+
+# sdfrome001 node
+Host usdf001
+  Hostname sdfrome001
+  ProxyJump usdf-login
+
+# sdfrome002 node
+Host usdf002
+  Hostname sdfrome002
+  ProxyJump usdf-login
