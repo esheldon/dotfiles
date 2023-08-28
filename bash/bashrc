@@ -49,6 +49,7 @@ comet_test=`echo $host | grep -i comet`
 
 bebop_test=`echo $host | grep -i bebop`
 duke_test=`echo $host | grep -i duke`
+usdf_test=`echo $hname | grep sdfr`
 
 if [[ "$hname" == "theshire" ]]; then
     dotfileDir=$ddir/theshire
@@ -57,6 +58,8 @@ elif [[ $isnersc == "Y" ]]; then
 elif [[ $rcftest != "" ]]; then
     # put this one last in case other bnl machines are matched
     dotfileDir=$ddir/astro.bnl.gov
+elif [[ $usdf_test != "" ]]; then
+    dotfileDir=$ddir/usdf
 elif [[ $slac_test != "" ]]; then
     dotfileDir=$ddir/slac-rhel6
 elif [[ $hname == "ria" ]]; then
