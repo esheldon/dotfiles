@@ -278,10 +278,10 @@ set tags=tags;/
 
 let g:vim_markdown_folding_disabled=1
 
-call plug#begin('~/.vim/plugged')
-    Plug 'ziglang/zig.vim'
-    " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-call plug#end()
+" call plug#begin('~/.vim/plugged')
+"     Plug 'ziglang/zig.vim'
+"     " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" call plug#end()
 
 "Bundle 'scrooloose/syntastic'
 
