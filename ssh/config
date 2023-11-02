@@ -62,3 +62,10 @@ Host usdf001
 Host usdf002
   Hostname sdfrome002
   ProxyJump usdf-login
+
+
+# for specific machines, use e.g. cent7a.slac.stanford.edu
+Host slac
+  Hostname centos7.slac.stanford.edu
+
+
