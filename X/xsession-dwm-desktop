@@ -17,6 +17,10 @@ if [ -r ~/.Xmodmap ]; then
 fi
 
 xsetroot -solid black
+cursor=/usr/share/icons/Adwaita/cursors/left_ptr
+if [[ -e $cursor ]]; then
+    xsetroot -xcf $cursor 16
+fi
 
 # speed up the keyboard
 xset r rate 300 30
@@ -26,7 +30,7 @@ if [ -x /usr/bin/pnmixer ]; then
     pnmixer &
 fi
 
-dwm-status-bar &
+~/scripts/dwm-status-bar &
 
 if [[ -e ~/.fehbg ]]; then
     bash ~/.fehbg &
