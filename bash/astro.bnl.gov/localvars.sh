@@ -46,3 +46,6 @@ export TEST_DESDATA=/astro/u/esheldon/git/des-y3-test-data
 
 export SLDIR=/astro/u/astrodat/data/DES/jpg/stronglens
 export CATSIM_DIR=$HOME/lensing/catsim
+
+export RUBIN_SIM_DATA_DIR=/astro/u/esheldon/oh2/rubin_sim_data/
+export SIMS_SED_LIBRARY_DIR=$RUBIN_SIM_DATA_DIR/sims_sed_library
