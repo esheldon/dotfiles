@@ -39,6 +39,7 @@ fi
 if [[ -x /usr/bin/xscreensaver ]]; then
     xscreensaver &
 fi
+numlockx off
 
 # sleep $sleeptime
 
