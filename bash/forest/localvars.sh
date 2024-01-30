@@ -24,3 +24,7 @@ export CATSIM_DIR=$HOME/data/catsim
 
 export FITVD_DIR=$HOME/data/fitvd/outputs
 export FITVD_CONFIG_DIR=$HOME/data/fitvd/fitvd-config
+
+export IMSIM_HOME=$HOME/git
+export RUBIN_SIM_DATA_DIR=$HOME/data/rubin_sim_data
+export SIMS_SED_LIBRARY_DIR=$RUBIN_SIM_DATA_DIR/sims_sed_library
