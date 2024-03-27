@@ -668,7 +668,7 @@ except:
     print('could not import %s')
     pass
 """
-for pkg in ['ngmix', 'proplot as pplt']:
+for pkg in ['ngmix', 'matplotlib', 'matplotlib.pyplot as mplt']:
     optlines = optional_lines % (pkg, pkg)
     app.exec_lines.append(optlines)
 
