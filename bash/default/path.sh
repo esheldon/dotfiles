@@ -23,5 +23,11 @@ else
     if [[ -e $ANACONDA_DIR ]]; then
         export ANACONDA_DIR
         prepend_path PATH ${ANACONDA_DIR}/bin
+    else
+        ANACONDA_DIR=$HOME/mambaforge
+        if [[ -e $ANACONDA_DIR ]]; then
+            export ANACONDA_DIR
+            prepend_path PATH ${ANACONDA_DIR}/bin
+        fi
     fi
 fi
