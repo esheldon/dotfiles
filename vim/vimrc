@@ -178,74 +178,71 @@ if &t_Co > 2 || has("gui_running")
         " 
         " NOTE:  Statusline seems to be special.  Had to hack zenburn
         " to set gui=inverse explicitly
-        function! Highlight_remove_attr(attr)
-            " save selection registers
-            new
-            silent! put
-
-            " get current highlight configuration
-            redir @x
-            silent! highlight
-            redir END
-            " open temp buffer
-            new
-            " paste in
-            silent! put x
-
-            " convert to vim syntax (from Mkcolorscheme.vim,
-            "   http://vim.sourceforge.net/scripts/script.php?script_id=85)
-            " delete empty,"links" and "cleared" lines
-            silent! g/^$\| links \| cleared/d
-            " join any lines wrapped by the highlight command output
-            silent! %s/\n \+/ /
-            " remove the xxx's
-            silent! %s/ xxx / /
-            " add highlight commands
-            silent! %s/^/highlight /
-            " protect spaces in some font names
-            silent! %s/font=\(.*\)/font='\1'/
-
-            " substitute bold with "NONE"
-            execute 'silent! %s/' . a:attr . '\([\w,]*\)/NONE\1/geI'
-            " yank entire buffer
-            normal ggVG
-            " copy
-            silent! normal "xy
-            " run
-            execute @x
-
-            " remove temp buffer
-            bwipeout!
-
-            " restore selection registers
-            silent! normal ggVGy
-            bwipeout!
-        endfunction
-        autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
+        " function! Highlight_remove_attr(attr)
+        "     " save selection registers
+        "     new
+        "     silent! put
+        "
+        "     " get current highlight configuration
+        "     redir @x
+        "     silent! highlight
+        "     redir END
+        "     " open temp buffer
+        "     new
+        "     " paste in
+        "     silent! put x
+        "
+        "     " convert to vim syntax (from Mkcolorscheme.vim,
+        "     "   http://vim.sourceforge.net/scripts/script.php?script_id=85)
+        "     " delete empty,"links" and "cleared" lines
+        "     silent! g/^$\| links \| cleared/d
+        "     " join any lines wrapped by the highlight command output
+        "     silent! %s/\n \+/ /
+        "     " remove the xxx's
+        "     silent! %s/ xxx / /
+        "     " add highlight commands
+        "     silent! %s/^/highlight /
+        "     " protect spaces in some font names
+        "     silent! %s/font=\(.*\)/font='\1'/
+        "
+        "     " substitute bold with "NONE"
+        "     execute 'silent! %s/' . a:attr . '\([\w,]*\)/NONE\1/geI'
+        "     " yank entire buffer
+        "     normal ggVG
+        "     " copy
+        "     silent! normal "xy
+        "     " run
+        "     execute @x
+        "
+        "     " remove temp buffer
+        "     bwipeout!
+        "
+        "     " restore selection registers
+        "     silent! normal ggVGy
+        "     bwipeout!
+        " endfunction
+        " autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
         " Note adding ,Syntax above messes up the syntax loading
         " See :help syntax-loading for more info
 
     else
 
-        " set background=light
+        " we could turn on termguicolors if we want.  Will need
+        " these also
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
         set background=dark
 
-
-        " note this works in gnome terminal/xfce4-terminal etc but not in
-        " screen. It kind of works in new tmux, some colors not quite right
-        if &t_Co > 256
-            set termguicolors
-            Zenburn()
-            "colorscheme white-sand
-        else
-            " colorscheme default
-            " hi StatusLine ctermfg=223 ctermbg=240
-            Zenburn()
-        endif
+        " set termguicolors
+        Zenburn()
 
     endif
 
 endif 
+
+" comments get italic font
+highlight Comment cterm=italic gui=italic
 
 
 " will turn it back on later
