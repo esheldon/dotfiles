@@ -128,10 +128,14 @@ if &t_Co > 2 || has("gui_running")
     set hlsearch
 
     if has("gui_running")
-        set background=dark
-        Zenburn()
-        " set background=light
+        " set background=dark
+        " Zenburn()
+        set background=light
         " colorscheme white-sand
+        " colorscheme nuvola
+        colorscheme mynuvola
+        " let g:gruvbox_contrast_dark='hard'
+        " colorscheme gruvbox
 
         " Set pointer
         set mouseshape=a:beam
@@ -234,8 +238,10 @@ if &t_Co > 2 || has("gui_running")
 
         set background=dark
 
-        " set termguicolors
-        Zenburn()
+        set termguicolors
+        " Zenburn()
+        let g:gruvbox_contrast_dark='hard'
+        colorscheme gruvbox
 
     endif
 
@@ -270,6 +276,7 @@ Plugin 'wincent/command-t'
 Plugin 'craigemery/vim-autotag'
 Plugin 'nvie/vim-flake8'
 Plugin 'mswift42/vim-themes'
+Plugin 'morhetz/gruvbox'
 
 set tags=tags;/
 
