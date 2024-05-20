@@ -240,16 +240,20 @@ if &t_Co > 2 || has("gui_running")
 
         set termguicolors
         " Zenburn()
-        let g:gruvbox_contrast_dark='hard'
-        colorscheme gruvbox
+        " let g:gruvbox_contrast_dark='hard'
+        " colorscheme gruvbox
+        let g:sonokai_style = 'espresso'
+        " let g:sonokai_style = 'shusia'
+        colorscheme sonokai
 
     endif
 
 endif 
 
+hi Search guibg=peru guifg=wheat
+
 " comments get italic font
 highlight Comment cterm=italic gui=italic
-
 
 " will turn it back on later
 filetype off                  " required
@@ -277,6 +281,7 @@ Plugin 'craigemery/vim-autotag'
 Plugin 'nvie/vim-flake8'
 Plugin 'mswift42/vim-themes'
 Plugin 'morhetz/gruvbox'
+Plugin 'sainnhe/sonokai'
 
 set tags=tags;/
 
