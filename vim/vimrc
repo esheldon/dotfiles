@@ -239,12 +239,11 @@ if &t_Co > 2 || has("gui_running")
         set background=dark
 
         set termguicolors
-        " Zenburn()
+        Zenburn()
         " let g:gruvbox_contrast_dark='hard'
         " colorscheme gruvbox
-        let g:sonokai_style = 'espresso'
-        " let g:sonokai_style = 'shusia'
-        colorscheme sonokai
+        " let g:sonokai_style = 'espresso'
+        " colorscheme sonokai
 
     endif
 
@@ -276,7 +275,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'rust-lang/rust.vim'
-Plugin 'wincent/command-t'
+" Plugin 'wincent/command-t'
 Plugin 'craigemery/vim-autotag'
 Plugin 'nvie/vim-flake8'
 Plugin 'mswift42/vim-themes'
