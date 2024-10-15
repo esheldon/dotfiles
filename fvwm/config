@@ -70,7 +70,7 @@ ColorSet 19 fg white, bg #506070
 *FvwmIconMan: Action Mouse 1 N SendCommand Raise-and-Focus
 *FvwmIconMan: Sort Id
 # Show windows from all desktops at all times.
-*FvwmIconMan: Resolution Global
+# *FvwmIconMan: Resolution Global
 *FvwmIconMan: DrawIcons True
 
 # == Icon handling ==
