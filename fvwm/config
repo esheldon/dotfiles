@@ -27,7 +27,7 @@ CursorStyle "ROOT" "X_cursor"
 
 # == Pager/Desktops ==
 # 2 columns and 2 rows of pages in the desktop
-DeskTopSize 2 4
+DeskTopSize 3 3
 # Allow moving windows between desktops, but with a bit of resistance.
 EdgeResistance 150 150
 # Never scroll to next desktop using mouse.
@@ -39,8 +39,8 @@ EdgeScroll 0 0
 *FvwmPagerFont none
 *FvwmPagerFont none
 # ESS
-# *FvwmPagerGeometry 119x70-0+42
-*FvwmPagerGeometry 119x140-0+0
+# *FvwmPagerGeometry 119x140-0+0
+*FvwmPagerGeometry 119x119-0+0
 *FvwmPagerLabel FvwmPager
 # Don't draw window titles in the pager.
 *FvwmPager: WindowLabelFormat ""
@@ -52,7 +52,7 @@ EdgeScroll 0 0
 # *FvwmIconMan: ManagerGeometry 1x0-0+122
 ColorSet 19 fg white, bg #506070
 *FvwmIconMan: Colorset 19
-*FvwmIconMan: ManagerGeometry 1x0-0+150
+*FvwmIconMan: ManagerGeometry 1x0-0+129
 *FvwmIconMan: ButtonGeometry 119x0
 # Show just the window title in buttons.
 *FvwmIconMan: Format "%t"
@@ -143,7 +143,7 @@ MenuStyle * BorderWidth 1, TitleUnderlines1, ItemFormat "  %l%>  "
 ClickTime 250
 
 # Enable solid window moving for all window sizes.
-# OpaqueMoveSize -1
+OpaqueMoveSize -1
 
 # Emulate Motif Window Manager hints.
 Emulate Mwm
@@ -294,14 +294,13 @@ Key Down  A 4 Scroll +0 +100
 # first is column, second is row
 Key 1 A M GotoPage 0 0
 Key 2 A M GotoPage 1 0
-Key 3 A M GotoPage 0 1
-Key 4 A M GotoPage 1 1
-Key 5 A M GotoPage 0 2
-Key 6 A M GotoPage 1 2
-Key 7 A M GotoPage 0 3
-Key 8 A M GotoPage 1 3
-Key 9 A M GotoPage 1 3
-# Key 9 A M GotoPage 0 4
+Key 3 A M GotoPage 2 0
+Key 4 A M GotoPage 0 1
+Key 5 A M GotoPage 1 1
+Key 6 A M GotoPage 2 1
+Key 7 A M GotoPage 0 2
+Key 8 A M GotoPage 1 2
+Key 9 A M GotoPage 2 2
 
 # Alt-Tab like in MS Windows (-ish).
 Key Tab A M	WindowList Root c c CurrentAtEnd, IconifiedAtEnd, NoGeometry, NoDeskSort, SelectOnRelease Alt_L TabSwitchPrev
@@ -426,18 +425,8 @@ AddToMenu RootMenu
 +  "XTerm"             Exec xterm &
 +  ""                  Nop
 +  "Firefox"           Exec firefox &
-+  "TubeShell"         Exec xterm -fn -*-fixed-medium-*-*-*-18-*-*-*-*-*-iso10646-1 -title tube -e tubeshell &
-+  "Sylpheed"          Exec sylpheed &
-+  "Grafx2"            Exec grafx2 &
-+  "Slack WIP"         Exec xterm -fn 7x14 -geometry 177x58 -title slack-wip -e slack-term &
-+  "HexChat"           Exec hexchat &
-+  "WordGrinder"       Exec xterm -title wordgrinder -geometry 80x36 -fn -*-fixed-medium-*-*-*-20-*-*-*-*-*-iso10646-1 -bg gainsboro -fg slategray -e 'cd $HOME/docs; wordgrinder' &
-+  "Economy"           Exec gnumeric docs/ekonomi.xlsx &
-+  "FS-UAE"            Exec fs-uae-launcher &
-+  "ScummVM"           Exec scummvm &
-+  "File Manager"      Exec pcmanfm &
++  "Thunar"      Exec thunar &
 +  ""                  Nop
-+  "Volume Mixer"      Exec xterm -e alsamixer --device pulse &
 +  "Audio Panel"       Exec pavucontrol &
 +  ""                  Nop
 +  "Graphics"          Popup GfxMenu
