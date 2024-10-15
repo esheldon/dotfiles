@@ -188,7 +188,7 @@ c.InteractiveShell.autocall = 1
 #c.InteractiveShell.color_info = True
 
 ## Set the color scheme (NoColor, Neutral, Linux, or LightBG).
-#c.InteractiveShell.colors = 'Neutral'
+# c.InteractiveShell.colors = 'Linux'
 
 ## 
 #c.InteractiveShell.debug = False
@@ -680,3 +680,9 @@ except ImportError:
     pass
 """
 app.exec_lines.append(lines)
+
+try:
+    from IPython.core import ultratb
+    ultratb.VerboseTB._tb_highlight = "bg:ansired"
+except Exception:
+    print("Error patching background color for tracebacks, they'll be the ugly default instead")
