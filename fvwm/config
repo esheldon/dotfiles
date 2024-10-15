@@ -290,6 +290,10 @@ Key Right A 4 Scroll +100 +0
 Key Up    A 4 Scroll +0 -100
 Key Down  A 4 Scroll +0 +100
 
+# move to next window
+Key j A M Next (CirculateHit,AcceptsFocus,CurrentPage) WindowListFunc
+Key k A M Prev (CirculateHit,AcceptsFocus,CurrentPage) WindowListFunc
+
 # 1 or M is alt
 # first is column, second is row
 Key 1 A M GotoPage 0 0
