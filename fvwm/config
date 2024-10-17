@@ -294,9 +294,18 @@ Key Right A 4 Scroll +100 +0
 Key Up    A 4 Scroll +0 -100
 Key Down  A 4 Scroll +0 +100
 
+# my version of WindowListFunc
+# Uses Focus rather than FlipFocus, so things don't get
+# out of order
+AddToFunc MyWindowListFunc
+ + I Iconify off
+ + I Focus
+ + I Raise
+ + I WarpToWindow 5p 5p
+
 # move to next window
-Key j A M Next (CirculateHit,AcceptsFocus,CurrentPage) WindowListFunc
-Key k A M Prev (CirculateHit,AcceptsFocus,CurrentPage) WindowListFunc
+Key j A M Next (CirculateHit,AcceptsFocus,CurrentPage) MyWindowListFunc
+Key k A M Prev (CirculateHit,AcceptsFocus,CurrentPage) MyWindowListFunc
 
 # 1 or M is alt
 # first is column, second is row
