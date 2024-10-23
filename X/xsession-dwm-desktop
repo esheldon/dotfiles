@@ -17,6 +17,10 @@ if [ -r ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap
 fi
 
+if [ -e $HOME/.fonts ]; then
+    xset +fp $HOME/.fonts
+fi
+
 xsetroot -solid black
 cursor=/usr/share/icons/Adwaita/cursors/left_ptr
 if [[ -e $cursor ]]; then
