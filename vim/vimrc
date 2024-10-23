@@ -238,7 +238,7 @@ if &t_Co > 2 || has("gui_running")
 
         set background=dark
 
-        set termguicolors
+        # set termguicolors
         Zenburn()
         " let g:gruvbox_contrast_dark='hard'
         " colorscheme gruvbox
