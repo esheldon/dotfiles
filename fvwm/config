@@ -38,9 +38,8 @@ EdgeScroll 0 0
 *FvwmPagerHilight slategray
 *FvwmPagerFont none
 *FvwmPagerFont none
-# ESS
-# *FvwmPagerGeometry 119x140-0+0
-*FvwmPagerGeometry 150x90-0+0
+# *FvwmPagerGeometry 150x90-0+0
+*FvwmPagerGeometry 150x90+0+0
 *FvwmPagerLabel FvwmPager
 # Don't draw window titles in the pager.
 *FvwmPager: WindowLabelFormat ""
@@ -117,9 +116,9 @@ TitleStyle LeftJustified
 Style *             Title, Handles, !MWMFunctions, NoDecorHint
 Style *             DepressableBorder, HandleWidth 6, BorderWidth 6
 Style "FvwmIconMan" NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
-Style "FvwmPager"   NoTitle, Sticky, WindowListSkip, NoHandles
-Style "xload"       NoTitle, Sticky, WindowListSkip, NoHandles
-Style "xclock"      NoTitle, Sticky, WindowListSkip, NoHandles
+Style "FvwmPager"   NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
+Style "xload"       NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
+Style "xclock"      NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
 Style Cell          NoTitle, NoHandles, BorderWidth 0, FPLenient
 Style "VIC-II"      NoTitle, NoHandles, BorderWidth 0, FPLenient
 Style "gnome-mpv"   NoTitle, NoHandles, BorderWidth 0, FPLenient
@@ -225,11 +224,6 @@ AddToFunc Maximize-or-Move
  + I Raise
  + C Focus
  + M Move
-
-# Raise and Focus window.
-AddToFunc Raise-and-Focus
- + I Iconify Off
- + I Raise
  + I Focus
 
 # Sort of almost kind of Windows-ish Alt-Tab.
@@ -289,10 +283,10 @@ IgnoreModifiers L25
 
 # Paging: Windows key + arrows moves to the
 # next desktop in the desired direction.
-Key Left  A 4 Scroll -100 0
-Key Right A 4 Scroll +100 +0
-Key Up    A 4 Scroll +0 -100
-Key Down  A 4 Scroll +0 +100
+# Key Left  A 4 Scroll -100 0
+# Key Right A 4 Scroll +100 +0
+# Key Up    A 4 Scroll +0 -100
+# Key Down  A 4 Scroll +0 +100
 
 # my version of WindowListFunc
 # Uses Focus rather than FlipFocus, so things don't get
@@ -450,7 +444,8 @@ AddToMenu System-Menu
 AddToMenu RootMenu
 +  " Workspace Menu "  Title
 +  "XTerm"             Exec xterm &
-+  "xclock"            Exec xclock -norender -digital -strftime '%D %I:%M' &
++  "xclock"            Exec xclock -norender -digital -padding 2 -strftime '%D %I:%M' &
++  "xload"             Exec xload -geometry 122x89+161+0 &
 +  ""                  Nop
 +  "Firefox"           Exec firefox &
 +  "Thunar"            Exec thunar &
@@ -484,5 +479,35 @@ AddToMenu RootMenu
   +  "Audacity"      exec audacity &
   +  "MilkyTracker"  exec milkytracker -nosplash &
   +  "MikMod"        exec xterm -title MikMod -e mikmod &
+
+
+# The cloc, tray
+ColorSet 20 fg #FFD4A1, bg black
+# Style "TestDock" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+#   CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable, \
+#   NeverFocus
+Style "TestDock" NoTitle, !Handles, Sticky, WindowListSkip, \
+  CirculateSkip, FixedSize, !Iconifiable, NeverFocus
+# Style "TestDock" NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
+
+DestroyModuleConfig TestDock: *
+*TestDock: Geometry 300x30-0+0
+*TestDock: Colorset 20
+*TestDock: BoxSize smart
+*TestDock: Rows 1
+# *TestDock: Columns 2
+*TestDock: Frame 0
+# *TestDock: Font "fixed"
+Test (x stalonetray) *TestDock: (150x1, Swallow(NoClose,UseOld) \
+    stalonetray 'Exec exec stalonetray -bg black', Frame 0, Right)
+*TestDock: (105x1, Swallow(NoClose,UseOld) xclock 'Exec exec xclock"', Frame 0)
+# Test (x stalonetray) *TestDock: (120x42, Swallow(NoClose,UseOld) \
+#     stalonetray 'Exec exec stalonetray', Frame 0)
+
+#    stalonetray 'Exec exec stalonetray --config \
+#    "$[FVWM_DATADIR]/default-config/.stalonetrayrc"', Frame 0)
+
+AddToFunc StartFunction I Module FvwmButtons TestDock
+# AddToFunc RestartFunction I Module FvwmButtons TestDock
 
 # == End of config file ==
