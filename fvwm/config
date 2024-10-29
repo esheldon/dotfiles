@@ -24,8 +24,8 @@ CursorStyle "ROOT" "X_cursor"
 # == FvwmEvent ==
 ###################################
 
-# this makes it so when returning to a page we get
-# focus on the last-focused window
+# When returning to a page and the mouse is not over a window,
+# this puts focus on the last focused window
 
 SetEnv FocusPage 0
 
