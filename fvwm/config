@@ -11,16 +11,6 @@
 # This is the path for images, UI pixmaps etc.
 ImagePath $HOME/.fvwm/icons:+
 
-# == Geometry Window ==
-# This is the window that shows geometry when moving/resizing windows,
-# so it's nice to have it big and clear for legibility.
-# Changes the default font - it's used for geometry window and overriden
-# everywhere else.
-# ESS
-# DefaultFont "-*-helvetica-bold-r-*-*-24-*-*-*-*-*-iso10646-1"
-# Uncomment to hide geometry window for move action
-#HideGeometryWindow Move
-
 # == Set cursors ==
 # Classic "X" root cursor
 CursorStyle "ROOT" "X_cursor"
@@ -47,7 +37,6 @@ EdgeScroll 0 0
 
 # == Set up icon manager ==
 # ESS
-# *FvwmIconMan: Font "-*-helvetica-bold-r-*-*-12-*-*-*-*-*-iso10646-1"
 # *FvwmIconMan: ManagerGeometry 1x0-0+122
 ColorSet 19 fg white, bg #506070
 *FvwmIconMan: Colorset 19
@@ -97,10 +86,6 @@ Style * HilightColorSet 16
 ColorSet 17 fg Gainsboro, bg Gray20
 Style * Colorset 17
 
-# Window Font (used in title bars).
-# ESS
-# WindowFont "-*-helvetica-bold-r-normal-*-12-*-*-*-*-*-iso10646-1"
-
 # Decorate transient windows. A must for GTK apps' sub-windows.
 Style * DecorateTransient
 
@@ -123,7 +108,6 @@ Style Cell          NoTitle, NoHandles, BorderWidth 0, FPLenient
 Style "VIC-II"      NoTitle, NoHandles, BorderWidth 0, FPLenient
 Style "gnome-mpv"   NoTitle, NoHandles, BorderWidth 0, FPLenient
 Style "xmessage"    NoTitle, NoHandles, BorderWidth 0, FPLenient, WindowListSkip
-# Style feh           NoTitle
 
 # == Menu styles ==
 
@@ -137,9 +121,6 @@ MenuStyle * HilightBack SteelBlue4, ActiveFore White,
 MenuStyle * Hilight3DOff, TrianglesUseFore, TrianglesSolid
 MenuStyle * TitleColorset 18, HilightTitleBack
 MenuStyle * BorderWidth 1, TitleUnderlines1, ItemFormat "  %l%>  "
-# Menu Font
-# ESS
-# MenuStyle * Font "-*-helvetica-bold-r-*-*-12-*-*-*-*-*-iso10646-1"
 
 # == Various flags and styles ==
 # 250ms = Click.
@@ -160,9 +141,9 @@ Style "*" PositionPlacement UnderMouse
 # Double click on this closes window.
 Mouse 0 1 A Menu Window-Ops2 Close
 # Second rightmost button (small square) iconfies the window.
-Mouse 0 4 A Iconify
+# Mouse 0 4 A Iconify
 # Rightmost button (big square) maximises the window vertically.
-Mouse 0 2 A Maximize 0 100
+Mouse 0 2 A Maximize 100 100
 
 
 # Listeners for root window (the "desktop").
@@ -173,17 +154,12 @@ Mouse 3 R A Menu System-Menu Nop
 # Middle click = Window list.
 Mouse 2 R A WindowList
 
-# Middle click on border = Iconify.
-Mouse 2 FS A Iconify
-
 # Right click in border or on window title = raise or lower window.
 Mouse 3 TSIF A RaiseLower
 
 # Handle clicks in window title bar.
 # Left click = move, double click = maximize.
 Mouse 1 T A Maximize-or-Move
-# Middle click = Iconify.
-Mouse 2 T A Iconify
 
 # 4 is win key
 # M or 1 is Alt
@@ -192,8 +168,9 @@ Mouse 2 T A Iconify
 # ESS use alt mouse 1
 Mouse 1 W M Move-or-Raise
 
+# This never worked right
 # Mouse 3 (right) and alt (1)
-Mouse 3 W 1 Resize
+# Mouse 3 W 1 Resize
 
 # == Init (startup) function ==
 AddToFunc "InitFunction" I Module FvwmPager
@@ -281,13 +258,6 @@ AddToFunc DecreaseHeight
 # Ignore Num Lock.
 IgnoreModifiers L25
 
-# Paging: Windows key + arrows moves to the
-# next desktop in the desired direction.
-# Key Left  A 4 Scroll -100 0
-# Key Right A 4 Scroll +100 +0
-# Key Up    A 4 Scroll +0 -100
-# Key Down  A 4 Scroll +0 +100
-
 # my version of WindowListFunc
 # Uses Focus rather than FlipFocus, so things don't get
 # out of order
@@ -331,17 +301,6 @@ Key Tab	A CM	WindowList Root c c CurrentAtEnd, IconifiedAtEnd, NoGeometry, OnlyL
 # with arrow keys, window numbers etc.
 Key W A 4 WindowList Root
 
-# Windows key + Ctrl + Arrows to move mouse (and thus focus) to window,
-# but only within the current page.
-Key Up    A C4 Direction North (CurrentPage) WarpToWindow
-Key Down  A C4 Direction South (CurrentPage) WarpToWindow
-Key Left  A C4 Direction West  (CurrentPage) WarpToWindow
-Key Right A C4 Direction East  (CurrentPage) WarpToWindow
-
-# Windows key + page up/page down for volume.
-Key Prior   A 4 Exec xvol up &
-Key Next    A 4 Exec xvol down &
-
 # Win + F1 = Maximize active window horizontally + vertically.
 Key F1 A 4 Maximize
 
@@ -361,37 +320,19 @@ Key Right A 14 WinAndCursRight
 Key Up    A 14 WinAndCursUp
 Key Down  A 14 WinAndCursDown
 
-# Same as above but shift + win + alt + arrows and bigger distance (100px).
-Key Left  A S14 WinAndCursLeftS
-Key Right A S14 WinAndCursRightS
-Key Up    A S14 WinAndCursUpS
-Key Down  A S14 WinAndCursDownS
-
 # Shift + Win + Arrows: Resize window.
 Key Right A S4 IncreaseWidth
 Key Left A S4 DecreaseWidth
 Key Down A S4 IncreaseHeight
 Key Up A S4 DecreaseHeight
 
-# Start file manager: Windows key + e.
-Key e A 4 Exec pcmanfm &
-
-# Show root menu from anywhere: Windows key + Escape.
-Key Escape A 4 Menu RootMenu
-
-# Show system root menu from anywhere: Shift + Windows key + Escape.
-Key Escape A S4 Menu System-Menu
-
-# New terminal: Win + Enter.
-# Key Return A 4 Exec xterm &
-
-# New terminal with tmux: Shift + Win + Enter.
-Key Return A S4 Exec xterm -n "tmux xterm" -e tmux &
-
 # S means shift
 # 1 means alt
 # for some reason we need A between the S+1 and the Return (enter)
 Key Return A S1 Exec xterm &
+
+# New terminal with tmux: Shift + Win + Enter.
+Key Return A S4 Exec xterm -n "tmux xterm" -e tmux &
 
 # M or 1 is Alt, we need A between
 Key p A M Exec dmenu_run
