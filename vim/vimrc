@@ -52,10 +52,8 @@ set wildmode=list:longest,full
 
 " Always show the filename at the bottom
 set laststatus=2
+
 " The content of the status line
-"set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-"set statusline=%1*%F%m%r%h%w%=%(%c%V\ %l/%L\ %P%)
-"set statusline=%F%m%r%h%w\ %04v\ %04l/%04L\ [%p%%]
 set statusline=%F%m%r%h%w%=%(\ %04v\ %04l/%04L\ [%p%%]%)
 
 " Turn off bells and flashes. 
@@ -81,28 +79,13 @@ nnoremap ,<space> :nohlsearch<CR>
 " selected, in which case it reformats the selected text: 
 " difference between a and i here is a moves you to *after* the paragraph.
 
-
 " n is for normal mode
 nnoremap Q gqap
-"nnoremap Q gqip
 " v is for visual mode.
 vnoremap Q gq
 
-" use the par program for formatting if it is available
-"let partest = substitute(system("which par"),"\n","","g")
-"if partest != ""
-"    set formatprg=par\ -w72
-"endif
-
-
-" Y by default is incongruous with C and D, in that it yanks a complete 
-" line (duplicating yy) rather than yanking to the end of the line. This 
-" fixes that: "
-noremap Y y$
-
 " Let h,l and cursor ceys wrap across begin and end line"
 set whichwrap=h,l,[,]
-
 
 " set up some functions to do colorscheme changes
 " we always want this
@@ -118,29 +101,16 @@ function! s:Default()
 endfunction
 command! -bang -complete=buffer -nargs=? Default call <SID>Default()
 
-
-
-
-" Switch syntax highlighting on when the terminal has colors
-" Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
     syntax on
     set hlsearch
 
     if has("gui_running")
-        " set background=dark
-        " Zenburn()
         set background=light
-        " colorscheme white-sand
-        " colorscheme nuvola
         colorscheme mynuvola
-        " let g:gruvbox_contrast_dark='hard'
-        " colorscheme gruvbox
 
         " Set pointer
         set mouseshape=a:beam
-        " I don't want clicking in the window to put the mouse there!
-        "set mouse=""
 
         "set gfn=peep\ 12
         "set gfn=-zevv-peep-medium-r-normal--16-140-75-75-c-80-iso8859-1
@@ -159,6 +129,7 @@ if &t_Co > 2 || has("gui_running")
         " Turn off right-hand, left-hand scrollbars
         set guioptions-=r
         set guioptions-=l
+
         " Even turn them off if the window is split
         set guioptions-=R
         set guioptions-=L
@@ -169,66 +140,6 @@ if &t_Co > 2 || has("gui_running")
         " CTRL+F7 to toggle the right-hand scroll bar
         nmap <C-F7> :if &guioptions=~'r' \| set guioptions-=r \| else \| set guioptions+=r \| endif<CR>
 
-
-        "The following removes bold from all highlighting
-        "as this is usually rendered badly for me. Note this
-        "is not done in .vimrc because bold usually makes
-        "the colour brighter on terminals and most terminals
-        "allow one to keep the new colour while turning off
-        "the actual bolding.
-
-        " Steve Hall wrote this function on vim@vim.org
-        " See :help attr-list for possible attrs to pass
-        " 
-        " NOTE:  Statusline seems to be special.  Had to hack zenburn
-        " to set gui=inverse explicitly
-        " function! Highlight_remove_attr(attr)
-        "     " save selection registers
-        "     new
-        "     silent! put
-        "
-        "     " get current highlight configuration
-        "     redir @x
-        "     silent! highlight
-        "     redir END
-        "     " open temp buffer
-        "     new
-        "     " paste in
-        "     silent! put x
-        "
-        "     " convert to vim syntax (from Mkcolorscheme.vim,
-        "     "   http://vim.sourceforge.net/scripts/script.php?script_id=85)
-        "     " delete empty,"links" and "cleared" lines
-        "     silent! g/^$\| links \| cleared/d
-        "     " join any lines wrapped by the highlight command output
-        "     silent! %s/\n \+/ /
-        "     " remove the xxx's
-        "     silent! %s/ xxx / /
-        "     " add highlight commands
-        "     silent! %s/^/highlight /
-        "     " protect spaces in some font names
-        "     silent! %s/font=\(.*\)/font='\1'/
-        "
-        "     " substitute bold with "NONE"
-        "     execute 'silent! %s/' . a:attr . '\([\w,]*\)/NONE\1/geI'
-        "     " yank entire buffer
-        "     normal ggVG
-        "     " copy
-        "     silent! normal "xy
-        "     " run
-        "     execute @x
-        "
-        "     " remove temp buffer
-        "     bwipeout!
-        "
-        "     " restore selection registers
-        "     silent! normal ggVGy
-        "     bwipeout!
-        " endfunction
-        " autocmd BufNewFile,BufRead * call Highlight_remove_attr("bold")
-        " Note adding ,Syntax above messes up the syntax loading
-        " See :help syntax-loading for more info
-
     else
 
         " we could turn on termguicolors if we want.  Will need
@@ -238,12 +149,8 @@ if &t_Co > 2 || has("gui_running")
 
         set background=dark
 
-        set termguicolors
+        " set termguicolors
         Zenburn()
-        " let g:gruvbox_contrast_dark='hard'
-        " colorscheme gruvbox
-        " let g:sonokai_style = 'espresso'
-        " colorscheme sonokai
 
     endif
 
@@ -260,14 +167,10 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" alternatively, pass a path where Vundle should install bundles
-"let path = '~/some/path/here'
-"call vundle#rc(path)
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
 Bundle 'zah/nim.vim'
-" Bundle 'shmay/vim-yaml'
 Bundle 'chase/vim-ansible-yaml'
 Bundle 'cespare/vim-toml'
 Bundle 'tomtom/tcomment_vim'
@@ -275,7 +178,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'rust-lang/rust.vim'
-" Plugin 'wincent/command-t'
 Plugin 'craigemery/vim-autotag'
 Plugin 'nvie/vim-flake8'
 Plugin 'mswift42/vim-themes'
@@ -285,26 +187,6 @@ Plugin 'sainnhe/sonokai'
 set tags=tags;/
 
 let g:vim_markdown_folding_disabled=1
-
-" call plug#begin('~/.vim/plugged')
-"     Plug 'ziglang/zig.vim'
-"     " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" call plug#end()
-
-"Bundle 'scrooloose/syntastic'
-
-" for compilation
-fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
-endf
-
-" Jump to tag
-nn <M-g> :call JumpToDef()<cr>
-ino <M-g> <esc>:call JumpToDef()<cr>i
 
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -329,9 +211,6 @@ augroup vimrcEx
 
 augroup END
 
-
-
-
 "autocmd FileType c,cpp,cc,h,hpp set cindent
 set autoindent
 set tabstop=4
@@ -354,7 +233,6 @@ set cino=(0
 " Tab-indenting "
 set cinkeys=0{,0},:,0#,!<Tab>,!^F
 
-
 " ignore case on searches "
 set ignorecase
 " but don't ignore if there's a capital in the search
@@ -363,28 +241,14 @@ set smartcase
 " Gui specific stuff
 set guioptions-=T
 
-
 set backup  " keep a backup file
-
 
 " show paren matches
 set showmatch
 
-",v brings up my .vimrc
-",V reloads it -- making all changes active (have to save first)
-
-map ,v :sp $VIMRC<CR><C-W>_
-map <silent> ,V :source $VIMRC<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
-
-"let python_highlight_indent_errors = 0
-" let python_highlight_space_errors = 0
-
-
 "gpg stuff
 let g:GPGPreferSymmetric = 1
 let g:GPGPreferArmor = 1
-
 
 " don't remove indent when # first on line!
 inoremap # X#

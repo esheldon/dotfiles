@@ -14,6 +14,11 @@ if [[ -d $localdir/include ]]; then
     prepend_path CPATH           ${localdir}/include
 fi
 
+alt_localdir=$HOME/.local
+if [[ -d $alt_localdir/bin ]]; then
+    prepend_path PATH ${alt_localdir}/bin
+fi
+
 ANACONDA_DIR=$HOME/miniconda3
 if [[ -e $ANACONDA_DIR ]]; then
     export ANACONDA_DIR
