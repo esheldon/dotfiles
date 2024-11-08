@@ -252,7 +252,7 @@ endif
 hi Search guibg=peru guifg=wheat
 
 " comments get italic font
-highlight Comment cterm=italic gui=italic
+" highlight Comment cterm=italic gui=italic
 
 " will turn it back on later
 filetype off                  " required
