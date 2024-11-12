@@ -1,20 +1,59 @@
-#!/bin/sh
-# under a display manager like gdm, will need to link this to ~/.Xsession
-# for startx ~/.xinitrc
+#!/bin/bash
+
+sleeptime=1
+
+# these are not getting killed off on logout, and
+# each time lxdm comes up it starts a new one
+
+killall gnome-keyring-daemon
+killall dwm-status-bar
+killall blueman-applet
 
 if [ -r ~/.Xdefaults ]; then
 	xrdb -merge ~/.Xdefaults
 fi
+
 if [ -r ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap
 fi
 
-
-if [ `which xscreensaver` != "" ]; then
-	ison=`ps auxww | grep screensaver | grep -v grep`
-	if [ "$ison" == "" ]; then
-		exec xscreensaver -no-splash &
-	fi
+if [ -e $HOME/.fonts ]; then
+    xset +fp $HOME/.fonts
 fi
 
+xsetroot -solid black
+cursor=/usr/share/icons/Adwaita/cursors/left_ptr
+if [[ -e $cursor ]]; then
+    xsetroot -xcf $cursor 16
+fi
+
+# speed up the keyboard
+xset r rate 300 30
+
+# volume control for pulse audio
+if [ -x /usr/bin/pnmixer ]; then
+    pnmixer &
+fi
+
+if [ -x /usr/bin/blueman-applet ]; then
+    /usr/bin/blueman-applet &
+fi
+
+~/scripts/dwm-status-bar &
+
+if [[ -e ~/.fehbg ]]; then
+    bash ~/.fehbg &
+fi
+
+if [[ -x /usr/bin/xscreensaver ]]; then
+    xscreensaver &
+fi
+
+xclock -norender -digital -padding 2 -strftime '%D %I:%M' &
+xload -geometry 122x89+161+0 &
+numlockx off
+
+# sleep $sleeptime
+
+# exec dwm
 exec fvwm
