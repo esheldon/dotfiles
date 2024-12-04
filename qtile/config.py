@@ -113,6 +113,7 @@ extension_defaults = widget_defaults.copy()
 
 foreground = "#fffbe5"
 sepfor = '#444444'
+curfor = '#FFC486'
 screens = [
     Screen(
         top=bar.Bar(
@@ -121,7 +122,7 @@ screens = [
                 widget.Sep(foreground=sepfor),
                 widget.GroupBox(
                     active=foreground,
-                    block_highlight_text_color=foreground,
+                    block_highlight_text_color=curfor,
                     this_current_screen_border=dark_orange_color,
                 ),
                 widget.Sep(foreground=sepfor),
