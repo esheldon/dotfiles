@@ -116,7 +116,7 @@ sepfor = '#444444'
 screens = [
     Screen(
         top=bar.Bar(
-            [
+            widgets=[
                 widget.CurrentLayout(foreground=foreground),
                 widget.Sep(foreground=sepfor),
                 widget.GroupBox(
@@ -162,8 +162,7 @@ screens = [
                 ),
                 # widget.QuickExit(),
             ],
-            # 24,
-            35,
+            size=24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # Borders are magenta
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]
