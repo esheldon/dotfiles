@@ -1,12 +1,19 @@
 from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+from libqtile.extension import DmenuRun
 
 dark_orange_color = "#6E3205"
 
 mod = "mod1"
-# terminal = guess_terminal()
 terminal = "xfce4-terminal"
+
+bar_height = 24
+
+dmenu_config = {
+    'dmenu_lines': 25,
+    'selected_background': dark_orange_color,
+}
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -38,7 +45,9 @@ keys = [
         desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "p", lazy.spawncmd(),
+    # Key([mod], "p", lazy.spawncmd(),
+    #     desc="Spawn a command using a prompt widget"),
+    Key([mod], "p", lazy.run_extension(DmenuRun(**dmenu_config)),
         desc="Spawn a command using a prompt widget"),
 ]
 
@@ -163,7 +172,7 @@ screens = [
                 ),
                 # widget.QuickExit(),
             ],
-            size=24,
+            size=bar_height,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # Borders are magenta
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]
