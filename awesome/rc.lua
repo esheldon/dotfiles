@@ -50,7 +50,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/esheldon/.config/awesome/default/theme.lua")
+beautiful.init("/home/esheldon/.config/awesome/theme.lua")
 
 col_orangish_dark = "#6E3205"
 dmenu_font = "Terminus:size=16"
