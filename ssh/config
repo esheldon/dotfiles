@@ -53,16 +53,13 @@ Host usdf
   Hostname rubin-devl
   ProxyJump usdf-login
 
-# sdfrome001 node
-Host usdf001
-  Hostname sdfrome001
+Host usdf012
+  Hostname sdfiana012
   ProxyJump usdf-login
 
-# sdfrome002 node
-Host usdf002
-  Hostname sdfrome002
+Host usdf013
+  Hostname sdfiana013
   ProxyJump usdf-login
-
 
 # for specific machines, use e.g. cent7a.slac.stanford.edu
 Host slac
