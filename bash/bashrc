@@ -39,6 +39,7 @@ ddir=${HOME}/.dotfiles/bash
 defaultDotfileDir=$ddir/default
 
 rcftest=`echo $host | grep -i rcf.bnl.gov`
+sdcctest=`echo $host | grep -i sdcc.bnl.gov`
 lsst_bnl_test=$(uname -n | grep -i lst.bnl)
 
 riemann_test=$(uname -n | grep n00)
@@ -56,7 +57,8 @@ if [[ "$hname" == "theshire" ]]; then
 elif [[ $isnersc == "Y" ]]; then
     dotfileDir=$ddir/nersc
 elif [[ $rcftest != "" ]]; then
-    # put this one last in case other bnl machines are matched
+    dotfileDir=$ddir/astro.bnl.gov
+elif [[ $sdcctest != "" ]]; then
     dotfileDir=$ddir/astro.bnl.gov
 elif [[ $usdf_test != "" ]]; then
     dotfileDir=$ddir/usdf
