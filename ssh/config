@@ -9,8 +9,6 @@ GSSAPIDelegateCredentials yes
 #
 # bnl machines
 #
-#  Hostname astro0101.rcf.bnl.gov
-#  Hostname astro0102.rcf.bnl.gov
 
 Host astro0101
   Hostname astrosub02.sdcc.bnl.gov
@@ -24,17 +22,29 @@ Host astro0102
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
-#Host astro0103
-#  Hostname astro0103.rcf.bnl.gov
-#  PubkeyAcceptedKeyTypes +ssh-rsa
-#  User esheldon
-#  ProxyJump %r@ssh.sdcc.bnl.gov:22
+Host oldastro0101
+  Hostname astro0101.rcf.bnl.gov
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
 
-#Host astro0104
-#  Hostname astro0104.rcf.bnl.gov
-#  PubkeyAcceptedKeyTypes +ssh-rsa
-#  User esheldon
-#  ProxyJump %r@ssh.sdcc.bnl.gov:22
+Host oldastro0102
+  Hostname astro0102.rcf.bnl.gov
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
+Host oldastro0103
+  Hostname astro0103.rcf.bnl.gov
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
+Host oldastro0104
+  Hostname astro0104.rcf.bnl.gov
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
 
 #
 # usdf machines
