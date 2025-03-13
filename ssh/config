@@ -11,7 +11,7 @@ GSSAPIDelegateCredentials yes
 #
 
 Host astro0101
-  Hostname astrosub02.sdcc.bnl.gov
+  Hostname astrosub01.sdcc.bnl.gov
   PubkeyAcceptedKeyTypes +ssh-rsa
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
