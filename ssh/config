@@ -10,13 +10,19 @@ GSSAPIDelegateCredentials yes
 # bnl machines
 #
 
-Host astro0101
+Host astro
+  Hostname astrosub02.sdcc.bnl.gov
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  User esheldon
+  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
+Host astro01
   Hostname astrosub01.sdcc.bnl.gov
   PubkeyAcceptedKeyTypes +ssh-rsa
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
-Host astro0102
+Host astro02
   Hostname astrosub02.sdcc.bnl.gov
   PubkeyAcceptedKeyTypes +ssh-rsa
   User esheldon
