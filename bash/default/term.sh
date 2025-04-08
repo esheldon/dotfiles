@@ -42,6 +42,9 @@ if [[ $TERM != "linux" ]]; then
             tmux*)
                 # most programs don't know how to interpret tmux*
                 export TERM=xterm-256color ;;
+            dvtm*)
+                # most programs don't know how to interpret dvtm*
+                export TERM=xterm-256color ;;
             rxvt*)
                 export TERM=xterm-256color ;;
             xterm*)
