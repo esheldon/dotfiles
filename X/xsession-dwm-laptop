@@ -14,6 +14,9 @@
 
 killall gnome-keyring-daemon
 killall dwm-status-bar
+killall blueman-applet
+
+xset +fp $HOME/.fonts
 
 if [ -r ~/.Xdefaults ]; then
 	xrdb -merge ~/.Xdefaults
@@ -58,6 +61,10 @@ fi
 
 if [ -x /usr/bin/xfce4-power-manager ]; then
     xfce4-power-manager &
+fi
+
+if [ -x /usr/bin/blueman-applet ]; then
+    /usr/bin/blueman-applet &
 fi
 
 track_id=$(xinput | grep Track | awk '{print $6}' | cut -d = -f 2)
