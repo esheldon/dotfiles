@@ -29,7 +29,8 @@ XTerm*utf8: 1
 ! xterm*font: -jmk-neep alt-medium-r-semicondensed--11-100-75-75-c-50-iso8859-15
 ! xterm*font: -jmk-Neep Alt-Medium-R-Normal--24-240-75-75-C-120-ISO8859-2
 
-xterm*renderFont: true
+! to override with fixed font on command line use
+! xterm -fn fixed -xrm 'XTerm*renderFont: false'
 ! XTerm*faceName: Inconsolata
 ! XTerm*faceName: Terminus
 
@@ -128,12 +129,14 @@ xterm*color13: #ff6699
 !!xterm*color14: #66ffff
 
 xclock*reverseVideo: true
+xclock*foreground: #FFD4A1
 xclock*minorColor: grey80
-xclock*majorColor: cyan
-xclock*secondColor: cyan4
-xclock*hourColor: green4
+xclock*majorColor: orange
+xclock*secondColor: orange
+xclock*hourColor: cyan
 xclock*minuteColor: orange
 
+!
 !BLK Cursor
 #define _color0        #000d18
 #define _color8        #000d18
