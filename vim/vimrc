@@ -84,6 +84,9 @@ nnoremap Q gqap
 " v is for visual mode.
 vnoremap Q gq
 
+command! PtpythonEmbed normal ifrom ptpython.repl import embed; embed(globals(), locals())
+command! IpythonEmbed normal iimport IPython; IPython.embed()
+
 " Let h,l and cursor ceys wrap across begin and end line"
 set whichwrap=h,l,[,]
 
