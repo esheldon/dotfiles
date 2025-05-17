@@ -40,3 +40,30 @@ try:
     import matplotlib.pyplot as mplt
 except ModuleNotFoundError:
     print('could not import matplotlib')
+
+
+def _maybe_highlight(src):
+    try:
+        from pygments import highlight
+        from pygments.lexers import PythonLexer
+        from pygments.formatters import TerminalFormatter
+        highlighted_source = highlight(
+            src,
+            PythonLexer(),
+            TerminalFormatter()
+        )
+        return highlighted_source
+    except ModuleNotFoundError:
+        return src
+
+
+def src(obj):
+    import inspect
+    import pydoc
+    import subprocess
+
+    src = inspect.getsource(obj)
+    hsrc = _maybe_highlight(src)
+    fname = inspect.getfile(obj)
+    hsrc = hsrc + f'\nFile: {fname}'
+    pydoc.pager(hsrc)
