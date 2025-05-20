@@ -320,5 +320,7 @@ endfunction
 
 " to allow scrolling in the pop up window
 set mouse=a
+" needed to work in screen
+set ttymouse=xterm2
 
 set viminfo+=n~/.vim/viminfo
