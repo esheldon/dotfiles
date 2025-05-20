@@ -173,19 +173,24 @@ call vundle#rc()
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
-Bundle 'zah/nim.vim'
 Bundle 'chase/vim-ansible-yaml'
 Bundle 'cespare/vim-toml'
 Bundle 'tomtom/tcomment_vim'
-Plugin 'godlygeek/tabular'
+Plugin 'vim-python/python-syntax'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'rust-lang/rust.vim'
-Plugin 'craigemery/vim-autotag'
 Plugin 'nvie/vim-flake8'
-Plugin 'mswift42/vim-themes'
-Plugin 'morhetz/gruvbox'
-Plugin 'sainnhe/sonokai'
+
+" probably only want this on local machine
+" also see section below "coc code completion"
+" Need node installed.  On local machine did curl -sL install-node.vercel.app/lts | sudo bash
+" to get checking/completion to work outside of loaded files,
+" need to install language server :CocInstall coc-pyright
+" for more config do :CocConfig and edit config file (can also do directly)
+" May have to go to ~/.vim/bundle/coc.nvim and "git checkout release"
+"
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 set tags=tags;/
 
@@ -264,5 +269,53 @@ let g:is_bash=1
 
 " turn off inserting comment lines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+"
+" coc code completion
+"
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent><nowait> [g <Plug>(coc-diagnostic-prev)
+nmap <silent><nowait> ]g <Plug>(coc-diagnostic-next)
+
+" Use K to show documentation for the object under the
+" cursor, in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 set viminfo+=n~/.vim/viminfo
