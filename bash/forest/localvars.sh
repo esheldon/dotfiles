@@ -27,4 +27,5 @@ export FITVD_CONFIG_DIR=$HOME/data/fitvd/fitvd-config
 
 export IMSIM_HOME=$HOME/git
 export RUBIN_SIM_DATA_DIR=$HOME/data/rubin_sim_data
+# export RUBIN_SIM_DATA_DIR=$HOME/data/rubin_sim_data_mini
 export SIMS_SED_LIBRARY_DIR=$RUBIN_SIM_DATA_DIR/sims_sed_library
