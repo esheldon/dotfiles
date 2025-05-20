@@ -1,0 +1,8 @@
+{
+    "suggest.enablePreselect": false,
+    "pyright.inlayHints.enable": false,
+    "pyright.inlayHints.functionReturnTypes": false,
+    "pyright.inlayHints.variableTypes": false,
+    "pyright.inlayHints.parameterTypes": false,
+    "python.analysis.typeCheckingMode": "off"
+}
