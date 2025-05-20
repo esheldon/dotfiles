@@ -318,4 +318,7 @@ function! ShowDocumentation()
   endif
 endfunction
 
+" to allow scrolling in the pop up window
+set mouse=a
+
 set viminfo+=n~/.vim/viminfo
