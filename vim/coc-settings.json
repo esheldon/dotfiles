@@ -1,4 +1,5 @@
 {
+    "pyright.disableDiagnostics": true,
     "suggest.enablePreselect": false,
     "pyright.inlayHints.enable": false,
     "pyright.inlayHints.functionReturnTypes": false,
