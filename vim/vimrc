@@ -190,7 +190,7 @@ Plugin 'nvie/vim-flake8'
 " for more config do :CocConfig and edit config file (can also do directly)
 " May have to go to ~/.vim/bundle/coc.nvim and "git checkout release"
 "
-" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 set tags=tags;/
 
@@ -300,13 +300,13 @@ endfunction
 
 " nmap <silent> gd <Plug>(coc-definition)
 set splitbelow
-nmap <silent>gd :call CocAction('jumpDefinition', 'split')<CR>￼
-nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent>gd :call CocAction('jumpDefinition', 'split')<CR>￼
+nnoremap <silent> gr <Plug>(coc-references)
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-nmap <silent><nowait> [g <Plug>(coc-diagnostic-prev)
-nmap <silent><nowait> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent><nowait> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent><nowait> ]g <Plug>(coc-diagnostic-next)
 
 " Use K to show documentation for the object under the
 " cursor, in preview window
