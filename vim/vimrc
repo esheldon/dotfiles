@@ -190,7 +190,7 @@ Plugin 'nvie/vim-flake8'
 " for more config do :CocConfig and edit config file (can also do directly)
 " May have to go to ~/.vim/bundle/coc.nvim and "git checkout release"
 "
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 
 set tags=tags;/
 
