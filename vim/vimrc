@@ -323,4 +323,7 @@ endfunction
 " needed to work in screen
 " set ttymouse=xterm2
 
+" coc seems to clobber Y
+map Y y$
+
 set viminfo+=n~/.vim/viminfo
