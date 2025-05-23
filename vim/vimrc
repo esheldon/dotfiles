@@ -298,7 +298,9 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
+set splitbelow
+nmap <silent>gd :call CocAction('jumpDefinition', 'split')<CR>￼
 nmap <silent> gr <Plug>(coc-references)
 
 " Use `[g` and `]g` to navigate diagnostics
