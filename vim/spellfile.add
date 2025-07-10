@@ -87,3 +87,5 @@ convolve
 reconvolution
 anisotropic
 covariance
+pointings
+Moffat
