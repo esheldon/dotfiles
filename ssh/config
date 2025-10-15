@@ -52,6 +52,13 @@ Host oldastro0104
   User esheldon
   ProxyJump %r@ssh.sdcc.bnl.gov:22
 
+Host astro0201
+  Hostname astro0201.phy.bnl.gov
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  User esheldon
+#  ProxyJump %r@ssh.sdcc.bnl.gov:22
+
+
 #
 # usdf machines
 #
