@@ -51,6 +51,7 @@ comet_test=`echo $host | grep -i comet`
 bebop_test=`echo $host | grep -i bebop`
 duke_test=`echo $host | grep -i duke`
 usdf_test=`echo $hname | grep sdfr`
+phy_test=`echo $hname | grep astro0201`
 
 if [[ "$hname" == "theshire" ]]; then
     dotfileDir=$ddir/theshire
@@ -60,6 +61,8 @@ elif [[ $rcftest != "" ]]; then
     dotfileDir=$ddir/astro.bnl.gov
 elif [[ $sdcctest != "" ]]; then
     dotfileDir=$ddir/astro.bnl.gov
+elif [[ $phy_test != "" ]]; then
+    dotfileDir=$ddir/phy.bnl.gov
 elif [[ $usdf_test != "" ]]; then
     dotfileDir=$ddir/usdf
 elif [[ $slac_test != "" ]]; then
