@@ -180,7 +180,8 @@ Plugin 'vim-python/python-syntax'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'JuliaLang/julia-vim'
 Plugin 'rust-lang/rust.vim'
-Plugin 'nvie/vim-flake8'
+" Plugin 'nvie/vim-flake8'
+Plugin 'prabirshrestha/vim-lsp'
 
 " probably only want this on local machine
 " also see section below "coc code completion"
@@ -269,6 +270,119 @@ let g:is_bash=1
 
 " turn off inserting comment lines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" ruff configuration
+" Disable signs globally (and optionally other on-type visuals for a cleaner edit)
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 0  " Optional: No underlines/highlights on-type
+let g:lsp_diagnostics_virtual_text_enabled = 0 " Optional: No inline text on-type
+
+if executable('ruff')
+    augroup vim_lsp_python
+        autocmd! * <buffer>
+        autocmd! FileType python call lsp#register_server({
+            \ 'name': 'ruff',
+            \ 'cmd': {server_info -> ['ruff', 'server']},
+            \ 'allowlist': ['python'],
+            \ 'initialization_options': {
+            \   'settings': {
+            \     'logLevel': 'warn'
+            \   }
+            \ },
+            \ })
+    augroup END
+
+    function! s:on_lsp_buffer_enabled() abort
+        setlocal omnifunc=lsp#complete
+        setlocal signcolumn=no " Always reserve space for signs (they'll appear post-F7)
+        if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+
+        " Navigation keybindings (optional)
+        nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+        nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+        nmap <buffer> K <plug>(lsp-hover)
+
+        " On-demand linting with clear if no errors
+        nnoremap <buffer> <F7> :call <SID>lint_on_demand()<CR>
+
+        " On-demand formatting with diff preview
+        nnoremap <buffer> <F8> :call <SID>preview_and_format()<CR>
+
+        " Optional: If you still want a signs toggle, use another key like <F9>
+        " nnoremap <buffer> <F9> :let g:lsp_diagnostics_signs_enabled=0 \| call lsp#document_diagnostics_clear() \| echo 'Diagnostic signs disabled'<CR>
+    endfunction
+
+    augroup lsp_install
+        au!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    augroup END
+endif
+
+" Helper function for <F7>: Lint, clear previous, and handle no errors
+function! s:lint_on_demand() abort
+    let g:lsp_diagnostics_signs_enabled = 1
+
+    " Clear previous diagnostics (loclist and signs)
+    call setloclist(0, [], 'r')  " Empty the location list
+    execute 'sign unplace * buffer=' . bufnr('%')
+
+    " Request fresh diagnostics
+    call execute('LspDocumentDiagnostics')
+
+    " Check if any diagnostics were found
+    let l:diags = getloclist(0)
+    if empty(l:diags)
+        lclose  " Close location list window if open
+        echo 'No errors found - cleared previous diagnostics.'
+    else
+        echo 'Diagnostics updated (' . len(l:diags) . ' issues).'
+        " Optional: Auto-open location list
+        " lopen
+    endif
+endfunction
+
+" Helper function for <F8> to format buffer, showing a diff of
+" what would be changed and a prompt asking whether
+" to apply the changes
+function! s:preview_and_format() abort
+    let l:content = join(getline(1, '$'), "\n") . "\n"
+    let l:temp_file = tempname() . '.py'
+    call writefile(split(l:content, "\n"), l:temp_file)
+    echo 'Debug: Temp file created at ' . l:temp_file
+    let l:check_output = system('ruff format --check ' . shellescape(l:temp_file))
+    if v:shell_error == 0
+        call delete(l:temp_file)
+        echo 'No formatting changes needed.'
+        return
+    endif
+    let l:diff_output = system('ruff format --diff ' . shellescape(l:temp_file))
+    echo 'Debug: Diff length = ' . len(l:diff_output) . ' chars'
+    if empty(l:diff_output)
+        call delete(l:temp_file)
+        echo 'Warning: Diff generated but empty (check Ruff install/PATH).'
+        return
+    endif
+    vnew
+    let l:diff_win = bufnr('%')
+    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+    call setline(1, split(l:diff_output, "\n"))
+    execute "normal! gg"
+    setlocal syntax=diff
+    redraw!
+    wincmd p
+    echo 'Diff shown in vertical split. Apply formatting?'
+    let l:choice = confirm('Apply these changes?', "&Yes\n&No")
+    if l:choice == 1
+        call execute('LspDocumentFormatSync')
+        echo 'Formatting applied!'
+        execute l:diff_win . 'bwipeout!'
+    else
+        echo 'Formatting skipped.'
+        execute l:diff_win . 'bwipeout'
+    endif
+    call delete(l:temp_file)
+endfunction
+
 
 "
 " coc code completion
