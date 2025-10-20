@@ -56,7 +56,7 @@ Host astro0201
   Hostname astro0201.phy.bnl.gov
   PubkeyAcceptedKeyTypes +ssh-rsa
   User esheldon
-#  ProxyJump %r@ssh.sdcc.bnl.gov:22
+#  ProxyJump  ProxyJump %r@cssh.rhic.bnl.gov
 
 
 #
