@@ -12,6 +12,7 @@
 *.exe
 *egg-info
 tags
+*__pycache__*
 
 /build/
 /target/
