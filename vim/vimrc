@@ -278,23 +278,21 @@ let g:lsp_diagnostics_highlights_enabled = 0  " Optional: No underlines/highligh
 let g:lsp_diagnostics_virtual_text_enabled = 0 " Optional: No inline text on-type
 
 if executable('ruff')
-    augroup vim_lsp_python
-        autocmd! * <buffer>
-        autocmd! FileType python call lsp#register_server({
-            \ 'name': 'ruff',
-            \ 'cmd': {server_info -> ['ruff', 'server']},
-            \ 'allowlist': ['python'],
-            \ 'initialization_options': {
-            \   'settings': {
-            \     'logLevel': 'warn'
-            \   }
-            \ },
-            \ })
-    augroup END
+    " Register the server once on LSP setup
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info -> ['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'initialization_options': {
+        \   'settings': {
+        \     'logLevel': 'warn'
+        \   }
+        \ },
+        \ })
 
     function! s:on_lsp_buffer_enabled() abort
         setlocal omnifunc=lsp#complete
-        setlocal signcolumn=no " Always reserve space for signs (they'll appear post-F7)
+        setlocal signcolumn=no
         if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
         " Navigation keybindings (optional)
@@ -306,10 +304,11 @@ if executable('ruff')
         nnoremap <buffer> <F7> :call <SID>lint_on_demand()<CR>
 
         " On-demand formatting with diff preview
-        nnoremap <buffer> <F8> :call <SID>preview_and_format()<CR>
+        " nnoremap <buffer> <F8> :call <SID>preview_and_format()<CR>
+        nnoremap <buffer> <F8> :LspDocumentFormatSync<CR>
 
         " Optional: If you still want a signs toggle, use another key like <F9>
-        " nnoremap <buffer> <F9> :let g:lsp_diagnostics_signs_enabled=0 \| call lsp#document_diagnostics_clear() \| echo 'Diagnostic signs disabled'<CR>
+        " nnoremap <buffer> <F9> :let g:lsp_diagnostics_signs_enabled=0 \| echo 'Diagnostic signs disabled'<CR>
     endfunction
 
     augroup lsp_install
@@ -321,19 +320,19 @@ endif
 " Helper function for <F7>: Lint, clear previous, and handle no errors
 function! s:lint_on_demand() abort
     let g:lsp_diagnostics_signs_enabled = 1
-
+    
     " Clear previous diagnostics (loclist and signs)
     call setloclist(0, [], 'r')  " Empty the location list
     execute 'sign unplace * buffer=' . bufnr('%')
-
+    
     " Request fresh diagnostics
     call execute('LspDocumentDiagnostics')
-
+    
     " Check if any diagnostics were found
     let l:diags = getloclist(0)
     if empty(l:diags)
         lclose  " Close location list window if open
-        echo 'No errors found - cleared previous diagnostics.'
+        echo 'No errors found'
     else
         echo 'Diagnostics updated (' . len(l:diags) . ' issues).'
         " Optional: Auto-open location list
@@ -341,9 +340,7 @@ function! s:lint_on_demand() abort
     endif
 endfunction
 
-" Helper function for <F8> to format buffer, showing a diff of
-" what would be changed and a prompt asking whether
-" to apply the changes
+" Helper function for <F8> (unchanged)
 function! s:preview_and_format() abort
     let l:content = join(getline(1, '$'), "\n") . "\n"
     let l:temp_file = tempname() . '.py'
@@ -382,8 +379,6 @@ function! s:preview_and_format() abort
     endif
     call delete(l:temp_file)
 endfunction
-
-
 "
 " coc code completion
 "
