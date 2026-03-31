@@ -654,6 +654,8 @@ lines="""
 import espy.plotting
 from espy.plotting import plot
 from espy.plotting import plot_hist
+import espy.images
+from espy.images import view, multiview, view_mosaic
 """
 app.exec_lines.append(lines)
 
