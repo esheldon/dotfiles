@@ -44,13 +44,13 @@ if 'xterm' in term or 'rxvt' in term:
     sys.ps1 = '\001\033[32m\002>>> \001\033[0m\002'
     sys.ps2 = '\001\033[32m\002... \001\033[0m\002'
 
-#try:
-#    import esutil as eu
-#    from esutil.numpy_util import ahelp
-#except:
-#    pass
+try:
+   import esutil as eu
+   from esutil.numpy_util import ahelp
+except:
+   pass
 
-#try:
-#    import fitsio
-#except:
-#    pass
+try:
+   import fitsio
+except:
+   pass
