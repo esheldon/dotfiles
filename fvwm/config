@@ -448,10 +448,11 @@ AddToMenu System-Menu
 
 # This is the Root Menu (left click on root window, Win+Esc),
 # for launching applications. It will open sub menus defined below.
+# +  "xclock"            Exec xclock -norender -digital -padding 2 -strftime '%D %I:%M' &
 AddToMenu RootMenu
 +  " Workspace Menu "  Title
 +  "XTerm"             Exec xterm &
-+  "xclock"            Exec xclock -norender -digital -padding 2 -strftime '%D %I:%M' &
++  "xclock"            Exec xclock -face Terminus:pixelsize=12 -digital -padding 4 -strftime '%D %I:%M' &
 +  "xload"             Exec xload -geometry 122x89+161+0 &
 +  "FvwmConsole"       Module FvwmConsole -terminal xterm -bg black -fg green
 +  ""                  Nop
@@ -503,7 +504,7 @@ Style "DockTray" NoTitle, !Handles, Sticky, WindowListSkip, \
 # Style "DockTray" NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
 
 DestroyModuleConfig DockTray: *
-*DockTray: Geometry 300x30-0+0
+*DockTray: Geometry 300x18-0+0
 *DockTray: Colorset 20
 *DockTray: BoxSize smart
 *DockTray: Rows 1
