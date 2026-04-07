@@ -71,7 +71,7 @@ def configure(repl):
     repl.cursor_shape_config = "Modal (vi)"
 
     # Paste mode. (When True, don't insert whitespace after new line.)
-    repl.paste_mode = False
+    repl.paste_mode = True
 
     # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
     repl.prompt_style = "classic"  # 'classic' or 'ipython'
