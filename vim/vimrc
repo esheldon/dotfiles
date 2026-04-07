@@ -43,7 +43,11 @@ vmap < <gv
 
 
 " does same as autochdir but doesn't cause crash?
-autocmd BufEnter * lcd %:p:h
+" autocmd BufEnter * lcd %:p:h
+augroup AutoChdir
+  autocmd!
+  autocmd BufEnter * if &buftype !=# 'terminal' | lchdir %:p:h | endif
+augroup END
 
 " For completion of files. This is like ambiguous in the shell 
 "set wildmode=longest,list,full
