@@ -452,6 +452,7 @@ AddToMenu System-Menu
 AddToMenu RootMenu
 +  " Workspace Menu "  Title
 +  "XTerm"             Exec xterm &
++  "XFCE Term"         Exec xfce4-terminal &
 +  "xclock"            Exec xclock -face Terminus:pixelsize=12 -digital -padding 4 -strftime '%D %I:%M' &
 +  "xload"             Exec xload -geometry 122x89+161+0 &
 +  "FvwmConsole"       Module FvwmConsole -terminal xterm -bg black -fg green
@@ -459,7 +460,7 @@ AddToMenu RootMenu
 +  "Firefox"           Exec firefox &
 +  "Thunar"            Exec thunar &
 +  ""                  Nop
-+  "Audio Panel"       Exec pavucontrol &
++  "pavucontrol"       Exec pavucontrol &
 +  ""                  Nop
 +  "Graphics"          Popup GfxMenu
 +  "Audio/Video"       Popup MediaMenu
