@@ -118,13 +118,10 @@ Style * EWMHMiniIconOverride
 # Menu colors are set in menu style below.
 
 # Active Window Colors.
-# ColorSet 16 fg Black, bg Gray
-# ColorSet 16 fg white, bg #7e5850
 ColorSet 16 fg white, bg Gray40
 Style * HilightColorSet 16
 
 # Inactive Window Colors.
-# ColorSet 17 fg Gainsboro, bg Gray40
 ColorSet 17 fg Gainsboro, bg Gray20
 Style * Colorset 17
 
