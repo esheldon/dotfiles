@@ -80,11 +80,14 @@ def src(obj):
     import inspect
     import pydoc
 
-    src = inspect.getsource(obj)
-    hsrc = _maybe_highlight(src)
-    fname = inspect.getfile(obj)
-    hsrc = hsrc + f'\nFile: {fname}'
-    pydoc.pager(hsrc)
+    try:
+        src = inspect.getsource(obj)
+        hsrc = _maybe_highlight(src)
+        fname = inspect.getfile(obj)
+        hsrc = hsrc + f'\nFile: {fname}'
+        pydoc.pager(hsrc)
+    except TypeError as err:
+        print(err)
 
 
 def doc(obj):
