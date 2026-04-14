@@ -88,7 +88,16 @@ nnoremap Q gqap
 " v is for visual mode.
 vnoremap Q gq
 
-command! PtpythonEmbed normal ifrom ptpython.repl import embed; embed(globals(), locals(), vi_mode=True)
+function! PtpythonEmbedFunc()
+    let l:lines = [
+        \ "from espy.ptpython_tools import embed",
+        \ "embed(globals(), locals())"
+        \ ]
+    let l:cur_line = line('.')
+    call append(l:cur_line, l:lines)
+endfunction
+
+command! PtpythonEmbed call PtpythonEmbedFunc()
 command! IpythonEmbed normal iimport IPython; IPython.embed()
 
 " Let h,l and cursor ceys wrap across begin and end line"
