@@ -91,8 +91,11 @@ def doc(obj):
     import inspect
     import pydoc
 
-    d = inspect.getdoc(obj)
-    fname = inspect.getfile(obj)
-    d = d + f'\nFile: {fname}'
-    pydoc.pager(d)
+    try:
+        d = inspect.getdoc(obj)
+        fname = inspect.getfile(obj)
+        d = f'File: {fname}\n\n{d}'
+        pydoc.pager(d)
+    except TypeError:
+        help(obj)
 
