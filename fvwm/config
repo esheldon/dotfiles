@@ -213,7 +213,8 @@ Mouse 1 W M Move-or-Raise
 
 # This never worked right
 # Mouse 3 (right) and alt (1)
-Mouse 3 W 1 Resize
+# Mouse 3 W A Resize
+Mouse 3 W A Resize-or-Raise
 
 ###################################
 # == Init (startup) function ==
@@ -240,10 +241,13 @@ AddToFunc Move-or-Raise
  + D Maximize
 
 # Resize and raise a window.
+DestroyFunc Resize-or-Raise
 AddToFunc Resize-or-Raise   
  + I Raise
- + M Resize
- + D Lower
+ + I WarpToWindow 100 100
+ + I Resize
+# + M Resize
+#  + D Lower
 
 # Maximize window on double-click in title bar.
 # On single click, focus and allow moving it.
@@ -276,19 +280,21 @@ AddToFunc WinAndCursDown
  + I Move w+0 w+30p
  + I CursorMove 0 +30p
 
-# Resize Window + Move Cursor without entering resize mode.
+# Resize Window
 AddToFunc IncreaseWidth
  + I Resize br w+50p w+0
- + I CursorMove +50p 0
+ + I WarpToWindow 50 50
 AddToFunc DecreaseWidth
  + I Resize br w-50p w+0
- + I CursorMove -50p 0
+ + I WarpToWindow 50 50
 AddToFunc IncreaseHeight
  + I Resize br w+0 w+50p
- + I CursorMove 0 +50p
+ + I WarpToWindow 50 50
 AddToFunc DecreaseHeight
  + I Resize br w+0 w-50p
- + I CursorMove 0 -50p
+ + I WarpToWindow 50 50
+
+
 
 ###################################
 # == Keyboard bindings ==
@@ -363,24 +369,15 @@ Key m A 4 Move
 
 # Activate resize window mode: Win + r.
 # ESS
-Key r A 4 Resize
+# Key r A 4 Resize
 
-# Move active window with Windows key + Alt + Arrows (30px).
-# Key Left  A 14 WinAndCursLeft
-# Key Right A 14 WinAndCursRight
-# Key Up    A 14 WinAndCursUp
-# Key Down  A 14 WinAndCursDown
-# Move with control-alt and h/l/k/j
+# Move active window
+# with control-alt and h/l/k/j
 Key h A CM WinAndCursLeft
 Key l A CM WinAndCursRight
 Key k A CM WinAndCursUp
 Key j A CM WinAndCursDown
 
-# Shift + Win + Arrows: Resize window.
-# Key Right A S4 IncreaseWidth
-# Key Left A S4 DecreaseWidth
-# Key Down A S4 IncreaseHeight
-# Key Up A S4 DecreaseHeight
 # Resize with shift-alt and h/l/k/j
 Key h A SM DecreaseWidth
 Key l A SM IncreaseWidth
