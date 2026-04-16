@@ -59,9 +59,11 @@ EdgeResistance 150 150
 # Never scroll to next desktop using mouse.
 EdgeScroll 0 0
 # Pager Look.
-*FvwmPagerBack #506070
+# *FvwmPagerBack #506070
+*FvwmPagerBack #5d594d
 *FvwmPagerFore black
-*FvwmPagerHilight slategray
+# *FvwmPagerHilight slategray
+*FvwmPagerHilight #7e7a5c
 *FvwmPagerFont none
 *FvwmPagerFont none
 # *FvwmPagerGeometry 150x90-0+0
@@ -118,7 +120,8 @@ Style * EWMHMiniIconOverride
 # Menu colors are set in menu style below.
 
 # Active Window Colors.
-ColorSet 16 fg white, bg Gray40
+# ColorSet 16 fg white, bg Gray40
+ColorSet 16 fg beige, bg #5d594d
 Style * HilightColorSet 16
 
 # Inactive Window Colors.
@@ -131,7 +134,7 @@ Style * DecorateTransient
 # Focus: Focus follows mouse (I.E. no click to focus).
 # SloppyFocus = Keep last focused window when cursor enters root window.
 # MouseFocus = Lose last focus and focus root when cursor enters root window.
-Style "*" SloppyFocus
+Style "*" MouseFocus
 
 # Window titles to the left.
 TitleStyle LeftJustified
@@ -174,6 +177,7 @@ ClickTime 250
 OpaqueMoveSize -1
 
 # Emulate Motif Window Manager hints.
+# this places the geometry feedback indicator at the center of the screen
 Emulate Mwm
 
 # Window Placement: New windows are placed directly under the mouse pointer.
@@ -211,9 +215,7 @@ Mouse 1 T A Maximize-or-Move
 # ESS use alt mouse 1
 Mouse 1 W M Move-or-Raise
 
-# This never worked right
-# Mouse 3 (right) and alt (1)
-# Mouse 3 W A Resize
+# Alt and right click and drag to resize
 Mouse 3 W A Resize-or-Raise
 
 ###################################
