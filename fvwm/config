@@ -216,7 +216,7 @@ Mouse 1 T A Maximize-or-Move
 Mouse 1 W M Move-or-Raise
 
 # Alt and right click and drag to resize
-Mouse 3 W A Resize-or-Raise
+Mouse 3 W 1 Resize-or-Raise
 
 ###################################
 # == Init (startup) function ==
