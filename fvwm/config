@@ -209,8 +209,8 @@ Mouse 2 R A WindowList
 Mouse 3 TSIF A RaiseLower
 
 # Handle clicks in window title bar.
-# Left click = move, double click = maximize.
-Mouse 1 T A Maximize-or-Move
+# Left click = move, double click = shade
+Mouse 1 T A RaiseMoveOrShade
 
 # ESS use alt mouse 1
 Mouse 1 W M Move-or-Raise
@@ -251,14 +251,16 @@ AddToFunc Resize-or-Raise
 # + M Resize
 #  + D Lower
 
-# Maximize window on double-click in title bar.
-# On single click, focus and allow moving it.
-AddToFunc Maximize-or-Move
- + D Maximize
- + I Raise
- + C Focus
- + M Move
- + I Focus
+# single click raise
+# double click window shade
+DestroyFunc RaiseMoveOrShade
+AddToFunc   RaiseMoveOrShade
++ D WindowShade
++ I Raise
++ C Focus
++ M Move
++ I Focus
+
 
 # Sort of almost kind of Windows-ish Alt-Tab.
 AddToFunc TabSwitchNext
@@ -406,6 +408,7 @@ Key p A M Exec dmenu_run
 AddToMenu Window-Ops2 
 +  "Move"     Move
 +  "Resize"   Resize
++  "Shade"    WindowShade
 +  ""         Nop
 +  "Delete"   Delete
 +  "Close"    Close
