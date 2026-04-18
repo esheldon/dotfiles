@@ -17,9 +17,9 @@ __all__ = ["configure"]
 
 
 def configure(repl):
-    repl.show_signature = False
+    repl.show_signature = True
     # Show docstring (bool).
-    repl.show_docstring = True
+    repl.show_docstring = False
 
     # Show the "[Meta+Enter] Execute" message when pressing [Enter] only
     # inserts a newline instead of executing the code.
@@ -55,11 +55,11 @@ def configure(repl):
 
     # Complete while typing. (Don't require tab before the
     # completion menu is shown.)
-    repl.complete_while_typing = True
+    repl.complete_while_typing = False
 
     # Fuzzy and dictionary completion.
     repl.enable_fuzzy_completion = False
-    repl.enable_dictionary_completion = False
+    repl.enable_dictionary_completion = True
 
     # Vi mode.
     repl.vi_mode = True
