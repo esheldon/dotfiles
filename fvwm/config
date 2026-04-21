@@ -181,7 +181,7 @@ OpaqueMoveSize -1
 Emulate Mwm
 
 # Window Placement: New windows are placed directly under the mouse pointer.
-Style "*" PositionPlacement UnderMouse
+# Style "*" PositionPlacement UnderMouse
 
 ###################################
 # == Mouse bindings ==
