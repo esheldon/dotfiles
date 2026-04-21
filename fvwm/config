@@ -412,6 +412,7 @@ AddToMenu Window-Ops2
 +  "Move"     Move
 +  "Resize"   Resize
 +  "Shade"    WindowShade
++  "(Un)Stick" Stick
 +  ""         Nop
 +  "Delete"   Delete
 +  "Close"    Close
