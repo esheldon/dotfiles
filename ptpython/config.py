@@ -17,7 +17,7 @@ __all__ = ["configure"]
 
 
 def configure(repl):
-    repl.show_signature = True
+    repl.show_signature = False
     # Show docstring (bool).
     repl.show_docstring = False
 
