@@ -182,6 +182,9 @@ Emulate Mwm
 
 # Window Placement: New windows are placed directly under the mouse pointer.
 # Style "*" PositionPlacement UnderMouse
+# New windows get focus
+Style * FPGrabFocus
+Style * FPGrabFocusTransient
 
 ###################################
 # == Mouse bindings ==
