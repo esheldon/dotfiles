@@ -148,6 +148,7 @@ if &t_Co > 255
     hi Identifier      ctermfg=223  
     "hi IncSearch       ctermbg=228   ctermfg=238    
     "hi IncSearch       ctermbg=228  ctermfg=0
+    hi Include         ctermfg=180
     hi IncSearch       ctermbg=228  ctermfg=25
     hi Keyword         ctermfg=223   cterm=bold
     hi Label           ctermfg=187   cterm=underline
@@ -185,7 +186,6 @@ if &t_Co > 255
     hi VisualNOS       ctermfg=236   ctermbg=210     cterm=bold
     hi WarningMsg      ctermfg=15    ctermbg=236     cterm=bold
     hi WildMenu        ctermbg=236   ctermfg=194     cterm=bold
-
 
 	if version >= 700
 		set cursorline
