@@ -181,7 +181,10 @@ OpaqueMoveSize -1
 Emulate Mwm
 
 # Window Placement: New windows are placed directly under the mouse pointer.
-Style "*" PositionPlacement UnderMouse
+# Style "*" PositionPlacement UnderMouse
+# New windows get focus
+Style * FPGrabFocus
+Style * FPGrabFocusTransient
 
 ###################################
 # == Mouse bindings ==
@@ -409,6 +412,7 @@ AddToMenu Window-Ops2
 +  "Move"     Move
 +  "Resize"   Resize
 +  "Shade"    WindowShade
++  "(Un)Stick" Stick
 +  ""         Nop
 +  "Delete"   Delete
 +  "Close"    Close
