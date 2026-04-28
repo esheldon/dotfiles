@@ -19,7 +19,7 @@ __all__ = ["configure"]
 def configure(repl):
     repl.show_signature = False
     # Show docstring (bool).
-    repl.show_docstring = True
+    repl.show_docstring = False
 
     # Show the "[Meta+Enter] Execute" message when pressing [Enter] only
     # inserts a newline instead of executing the code.
@@ -55,11 +55,11 @@ def configure(repl):
 
     # Complete while typing. (Don't require tab before the
     # completion menu is shown.)
-    repl.complete_while_typing = True
+    repl.complete_while_typing = False
 
     # Fuzzy and dictionary completion.
     repl.enable_fuzzy_completion = False
-    repl.enable_dictionary_completion = False
+    repl.enable_dictionary_completion = True
 
     # Vi mode.
     repl.vi_mode = True
@@ -71,7 +71,7 @@ def configure(repl):
     repl.cursor_shape_config = "Modal (vi)"
 
     # Paste mode. (When True, don't insert whitespace after new line.)
-    repl.paste_mode = False
+    repl.paste_mode = True
 
     # Use the classic prompt. (Display '>>>' instead of 'In [1]'.)
     repl.prompt_style = "classic"  # 'classic' or 'ipython'

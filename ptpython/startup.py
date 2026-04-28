@@ -3,9 +3,23 @@ from glob import glob
 try:
     import numpy as np
     from numpy import (
-        array,zeros,ones,where,arange,linspace,logspace,
-        sqrt, exp, cos, sin, tanh, arctanh, log, log10, median,
-        diag
+        array,
+        zeros,
+        ones,
+        where,
+        arange,
+        linspace,
+        logspace,
+        sqrt,
+        exp,
+        cos,
+        sin,
+        tanh,
+        arctanh,
+        log,
+        log10,
+        median,
+        diag,
     )
 except ModuleNotFoundError:
     print('could not import numpy')
@@ -46,11 +60,16 @@ def _maybe_highlight(src):
     try:
         from pygments import highlight
         from pygments.lexers import PythonLexer
-        from pygments.formatters import TerminalFormatter
+        from pygments.formatters import Terminal256Formatter
+
+        formatter = Terminal256Formatter(
+            bg='dark',
+            style='coffee',
+        )
         highlighted_source = highlight(
             src,
             PythonLexer(),
-            TerminalFormatter()
+            formatter,
         )
         return highlighted_source
     except ModuleNotFoundError:
@@ -60,10 +79,26 @@ def _maybe_highlight(src):
 def src(obj):
     import inspect
     import pydoc
-    import subprocess
 
-    src = inspect.getsource(obj)
-    hsrc = _maybe_highlight(src)
-    fname = inspect.getfile(obj)
-    hsrc = hsrc + f'\nFile: {fname}'
-    pydoc.pager(hsrc)
+    try:
+        src = inspect.getsource(obj)
+        hsrc = _maybe_highlight(src)
+        fname = inspect.getfile(obj)
+        hsrc = hsrc + f'\nFile: {fname}'
+        pydoc.pager(hsrc)
+    except TypeError as err:
+        print(err)
+
+
+def doc(obj):
+    import inspect
+    import pydoc
+
+    try:
+        d = inspect.getdoc(obj)
+        fname = inspect.getfile(obj)
+        d = f'File: {fname}\n\n{d}'
+        pydoc.pager(d)
+    except TypeError:
+        help(obj)
+

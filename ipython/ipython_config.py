@@ -124,7 +124,7 @@
 #------------------------------------------------------------------------------
 
 ## Whether to display a banner upon starting IPython.
-#c.TerminalIPythonApp.display_banner = True
+c.TerminalIPythonApp.display_banner = False
 
 ## If a command or file is given via the command-line, e.g. 'ipython foo.py',
 #  start an interactive shell after executing the file or command.
@@ -654,6 +654,8 @@ lines="""
 import espy.plotting
 from espy.plotting import plot
 from espy.plotting import plot_hist
+import espy.images
+from espy.images import view, multiview, view_mosaic
 """
 app.exec_lines.append(lines)
 

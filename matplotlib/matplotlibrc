@@ -5,7 +5,7 @@
 
 text.usetex  : True
 mathtext.fontset : cm
-font.family : cmr10
+font.family : serif
 
 xtick.top: True
 ytick.right: True
@@ -27,7 +27,8 @@ xtick.labelsize:16
 ytick.labelsize:16
 axes.xmargin: 0.1
 axes.ymargin: 0.1
-figure.constrained_layout.use: True
+# figure.constrained_layout.use: True
+figure.autolayout: True
 
 image.interpolation: nearest
 
