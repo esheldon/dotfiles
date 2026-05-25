@@ -23,3 +23,7 @@ nimcache
 .DS_Store
 
 .coverage
+
+**/.claude/settings.local.json
+
+**/.claude/settings.local.json
