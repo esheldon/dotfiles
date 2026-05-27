@@ -5,3 +5,7 @@ import = ["~/.config/alacritty/themes/default.toml"]
 [font]
 normal.family = "Inconsolata"
 size = 18
+
+[window.dimensions]
+columns = 80
+lines = 24
