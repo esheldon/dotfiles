@@ -659,7 +659,7 @@ from espy.images import view, multiview, view_mosaic
 """
 app.exec_lines.append(lines)
 
-for p in ['fitsio']:
+for p in ['fitsio', 'rustfits']:
     lines="import %s" % p
     app.exec_lines.append(lines)
 
