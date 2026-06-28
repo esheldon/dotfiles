@@ -6,7 +6,6 @@
 *.mod
 .deps
 *.dep
-*.lock
 *.rlib
 *.dll
 *.exe

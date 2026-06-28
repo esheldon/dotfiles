@@ -1,4 +1,5 @@
 from glob import glob
+import re
 
 try:
     import numpy as np
@@ -90,7 +91,7 @@ def src(obj):
         print(err)
 
 
-def doc(obj):
+def docold(obj):
     import inspect
     import pydoc
 
@@ -102,3 +103,52 @@ def doc(obj):
     except TypeError:
         help(obj)
 
+
+ANSI = {
+    'reset':  '\033[0m',
+    'bold':   '\033[1m',
+    'dim':    '\033[2m',
+    'cyan':   '\033[36m',
+    'yellow': '\033[33m',
+    'green':  '\033[32m',
+}
+
+ROLE_RE   = re.compile(r':(\w+):`~?([^`]+)`')
+CODE_RE   = re.compile(r'``([^`]+)``')
+EMPH_RE   = re.compile(r'(?<!\*)\*([^*\n]+)\*(?!\*)')
+STRONG_RE = re.compile(r'\*\*([^*\n]+)\*\*')
+
+
+def _render_rst(doc):
+    """
+    Simple renderer for rich text in doc strings
+
+    if you start expanding the renderer:
+
+        the order of those regexes matters.
+
+        STRONG_RE has to run before EMPH_RE (otherwise **bold** gets eaten as
+        two *emph* matches with an empty middle)
+
+        CODE_RE for double-backticks has to run before any single-backtick
+        handling you might add later.
+    """
+
+    def role_sub(m):
+        target = m.group(2).rsplit('.', 1)[-1]      # drop dotted prefix
+        return f"{ANSI['cyan']}{target}{ANSI['reset']}"
+
+    doc = ROLE_RE.sub(role_sub, doc)
+    doc = CODE_RE.sub(lambda m: f"{ANSI['green']}{m.group(1)}{ANSI['reset']}", doc)
+    doc = STRONG_RE.sub(lambda m: f"{ANSI['bold']}{m.group(1)}{ANSI['reset']}", doc)
+    doc = EMPH_RE.sub(lambda m: f"{ANSI['dim']}{m.group(1)}{ANSI['reset']}", doc)
+    return doc
+
+
+def doc(obj):
+    import pydoc
+
+    try:
+        pydoc.pager(_render_rst(obj.__doc__ or ''))
+    except TypeError:
+        help(obj)
