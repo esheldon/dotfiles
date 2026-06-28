@@ -157,3 +157,5 @@ aliascheck=`alias vi 2> /dev/null`
 if [ "$aliascheck" != "" ]; then
 	unalias vi
 fi
+
+shopt -u direxpand
