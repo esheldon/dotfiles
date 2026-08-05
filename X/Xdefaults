@@ -35,7 +35,7 @@ XTerm*utf8: 1
 ! XTerm*faceName: Terminus
 
 ! default
-XTerm*faceSize: 14
+XTerm*faceSize: 18
 
 ! unreadable
 XTerm*faceSize1: 12
@@ -60,6 +60,9 @@ xterm*cutNewLine: true
 ! but I dont know how
 xterm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
 
+! In UTF-8 mode xterm reads its font list from the utf8Fonts subresource
+XTerm*VT100.utf8Fonts.font5: -zevv-peep-medium-r-normal--16-140-75-75-c-80-iso8859-1
+XTerm*VT100.font5: -zevv-peep-medium-r-normal--16-140-75-75-c-80-iso8859-1
 
 xterm*saveLines: 2000
 xterm*scrollBar: false
@@ -71,7 +74,6 @@ xterm*charClass: 43:48,45-47:48,58:48,126:48
 xterm*rightScrollBar: true
 ! just show selected parts of line
 xterm*highlightSelection: true
-xterm*utf8:    2
 
 ! support sixel graphics
 xterm*decTerminalID: vt340
