@@ -49,7 +49,7 @@ comet_test=`echo $host | grep -i comet`
 
 bebop_test=`echo $host | grep -i bebop`
 duke_test=`echo $host | grep -i duke`
-usdf_test=`echo $hname | grep sdfr`
+usdf_test=`echo $hname | grep sdf`
 
 if [[ "$hname" == "theshire" ]]; then
     dotfileDir=$ddir/theshire
