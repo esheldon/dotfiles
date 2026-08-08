@@ -39,6 +39,7 @@ ddir=${HOME}/.dotfiles/bash
 defaultDotfileDir=$ddir/default
 
 rcftest=`echo $host | grep -i rcf.bnl.gov`
+sdcctest=`echo $host | grep -i sdcc.bnl.gov`
 lsst_bnl_test=$(uname -n | grep -i lst.bnl)
 
 riemann_test=$(uname -n | grep n00)
@@ -50,14 +51,18 @@ comet_test=`echo $host | grep -i comet`
 bebop_test=`echo $host | grep -i bebop`
 duke_test=`echo $host | grep -i duke`
 usdf_test=`echo $hname | grep sdf`
+phy_test=`echo $hname | grep astro0201`
 
 if [[ "$hname" == "theshire" ]]; then
     dotfileDir=$ddir/theshire
 elif [[ $isnersc == "Y" ]]; then
     dotfileDir=$ddir/nersc
 elif [[ $rcftest != "" ]]; then
-    # put this one last in case other bnl machines are matched
     dotfileDir=$ddir/astro.bnl.gov
+elif [[ $sdcctest != "" ]]; then
+    dotfileDir=$ddir/astro.bnl.gov
+elif [[ $phy_test != "" ]]; then
+    dotfileDir=$ddir/phy.bnl.gov
 elif [[ $usdf_test != "" ]]; then
     dotfileDir=$ddir/usdf
 elif [[ $slac_test != "" ]]; then
@@ -152,3 +157,5 @@ aliascheck=`alias vi 2> /dev/null`
 if [ "$aliascheck" != "" ]; then
 	unalias vi
 fi
+
+shopt -u direxpand

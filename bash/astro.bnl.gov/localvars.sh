@@ -1,5 +1,5 @@
 shopt -s direxpand
-export TMPDIR=/data/esheldon/tmp
+export TMPDIR=/tmp
 
 export DESDATA=/astro/u/astrodat/data/DES
 

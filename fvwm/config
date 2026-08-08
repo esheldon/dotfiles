@@ -59,9 +59,11 @@ EdgeResistance 150 150
 # Never scroll to next desktop using mouse.
 EdgeScroll 0 0
 # Pager Look.
-*FvwmPagerBack #506070
+# *FvwmPagerBack #506070
+*FvwmPagerBack #5d594d
 *FvwmPagerFore black
-*FvwmPagerHilight slategray
+# *FvwmPagerHilight slategray
+*FvwmPagerHilight #7e7a5c
 *FvwmPagerFont none
 *FvwmPagerFont none
 # *FvwmPagerGeometry 150x90-0+0
@@ -118,13 +120,11 @@ Style * EWMHMiniIconOverride
 # Menu colors are set in menu style below.
 
 # Active Window Colors.
-# ColorSet 16 fg Black, bg Gray
-# ColorSet 16 fg white, bg #7e5850
-ColorSet 16 fg white, bg Gray40
+# ColorSet 16 fg white, bg Gray40
+ColorSet 16 fg beige, bg #5d594d
 Style * HilightColorSet 16
 
 # Inactive Window Colors.
-# ColorSet 17 fg Gainsboro, bg Gray40
 ColorSet 17 fg Gainsboro, bg Gray20
 Style * Colorset 17
 
@@ -134,7 +134,7 @@ Style * DecorateTransient
 # Focus: Focus follows mouse (I.E. no click to focus).
 # SloppyFocus = Keep last focused window when cursor enters root window.
 # MouseFocus = Lose last focus and focus root when cursor enters root window.
-Style "*" SloppyFocus
+Style "*" MouseFocus
 
 # Window titles to the left.
 TitleStyle LeftJustified
@@ -177,10 +177,14 @@ ClickTime 250
 OpaqueMoveSize -1
 
 # Emulate Motif Window Manager hints.
+# this places the geometry feedback indicator at the center of the screen
 Emulate Mwm
 
 # Window Placement: New windows are placed directly under the mouse pointer.
-Style "*" PositionPlacement UnderMouse
+# Style "*" PositionPlacement UnderMouse
+# New windows get focus
+Style * FPGrabFocus
+Style * FPGrabFocusTransient
 
 ###################################
 # == Mouse bindings ==
@@ -208,15 +212,14 @@ Mouse 2 R A WindowList
 Mouse 3 TSIF A RaiseLower
 
 # Handle clicks in window title bar.
-# Left click = move, double click = maximize.
-Mouse 1 T A Maximize-or-Move
+# Left click = move, double click = shade
+Mouse 1 T A RaiseMoveOrShade
 
 # ESS use alt mouse 1
 Mouse 1 W M Move-or-Raise
 
-# This never worked right
-# Mouse 3 (right) and alt (1)
-# Mouse 3 W 1 Resize
+# Alt and right click and drag to resize
+Mouse 3 W 1 Resize-or-Raise
 
 ###################################
 # == Init (startup) function ==
@@ -243,19 +246,24 @@ AddToFunc Move-or-Raise
  + D Maximize
 
 # Resize and raise a window.
+DestroyFunc Resize-or-Raise
 AddToFunc Resize-or-Raise   
  + I Raise
- + M Resize
- + D Lower
+ + I WarpToWindow 100 100
+ + I Resize
+# + M Resize
+#  + D Lower
 
-# Maximize window on double-click in title bar.
-# On single click, focus and allow moving it.
-AddToFunc Maximize-or-Move
- + D Maximize
- + I Raise
- + C Focus
- + M Move
- + I Focus
+# single click raise
+# double click window shade
+DestroyFunc RaiseMoveOrShade
+AddToFunc   RaiseMoveOrShade
++ D WindowShade
++ I Raise
++ C Focus
++ M Move
++ I Focus
+
 
 # Sort of almost kind of Windows-ish Alt-Tab.
 AddToFunc TabSwitchNext
@@ -279,19 +287,21 @@ AddToFunc WinAndCursDown
  + I Move w+0 w+30p
  + I CursorMove 0 +30p
 
-# Resize Window + Move Cursor without entering resize mode.
+# Resize Window
 AddToFunc IncreaseWidth
  + I Resize br w+50p w+0
- + I CursorMove +50p 0
+ + I WarpToWindow 50 50
 AddToFunc DecreaseWidth
  + I Resize br w-50p w+0
- + I CursorMove -50p 0
+ + I WarpToWindow 50 50
 AddToFunc IncreaseHeight
  + I Resize br w+0 w+50p
- + I CursorMove 0 +50p
+ + I WarpToWindow 50 50
 AddToFunc DecreaseHeight
  + I Resize br w+0 w-50p
- + I CursorMove 0 -50p
+ + I WarpToWindow 50 50
+
+
 
 ###################################
 # == Keyboard bindings ==
@@ -366,24 +376,15 @@ Key m A 4 Move
 
 # Activate resize window mode: Win + r.
 # ESS
-Key r A 4 Resize
+# Key r A 4 Resize
 
-# Move active window with Windows key + Alt + Arrows (30px).
-# Key Left  A 14 WinAndCursLeft
-# Key Right A 14 WinAndCursRight
-# Key Up    A 14 WinAndCursUp
-# Key Down  A 14 WinAndCursDown
-# Move with control-alt and h/l/k/j
+# Move active window
+# with control-alt and h/l/k/j
 Key h A CM WinAndCursLeft
 Key l A CM WinAndCursRight
 Key k A CM WinAndCursUp
 Key j A CM WinAndCursDown
 
-# Shift + Win + Arrows: Resize window.
-# Key Right A S4 IncreaseWidth
-# Key Left A S4 DecreaseWidth
-# Key Down A S4 IncreaseHeight
-# Key Up A S4 DecreaseHeight
 # Resize with shift-alt and h/l/k/j
 Key h A SM DecreaseWidth
 Key l A SM IncreaseWidth
@@ -410,6 +411,8 @@ Key p A M Exec dmenu_run
 AddToMenu Window-Ops2 
 +  "Move"     Move
 +  "Resize"   Resize
++  "Shade"    WindowShade
++  "(Un)Stick" Stick
 +  ""         Nop
 +  "Delete"   Delete
 +  "Close"    Close
@@ -448,17 +451,19 @@ AddToMenu System-Menu
 
 # This is the Root Menu (left click on root window, Win+Esc),
 # for launching applications. It will open sub menus defined below.
+# +  "xclock"            Exec xclock -norender -digital -padding 2 -strftime '%D %I:%M' &
 AddToMenu RootMenu
 +  " Workspace Menu "  Title
 +  "XTerm"             Exec xterm &
-+  "xclock"            Exec xclock -norender -digital -padding 2 -strftime '%D %I:%M' &
++  "XFCE Term"         Exec xfce4-terminal &
++  "xclock"            Exec xclock -face Terminus:pixelsize=12 -digital -padding 4 -strftime '%D %I:%M' &
 +  "xload"             Exec xload -geometry 122x89+161+0 &
 +  "FvwmConsole"       Module FvwmConsole -terminal xterm -bg black -fg green
 +  ""                  Nop
 +  "Firefox"           Exec firefox &
 +  "Thunar"            Exec thunar &
 +  ""                  Nop
-+  "Audio Panel"       Exec pavucontrol &
++  "pavucontrol"       Exec pavucontrol &
 +  ""                  Nop
 +  "Graphics"          Popup GfxMenu
 +  "Audio/Video"       Popup MediaMenu
@@ -503,7 +508,7 @@ Style "DockTray" NoTitle, !Handles, Sticky, WindowListSkip, \
 # Style "DockTray" NoTitle, Sticky, WindowListSkip, NoHandles, NeverFocus
 
 DestroyModuleConfig DockTray: *
-*DockTray: Geometry 300x30-0+0
+*DockTray: Geometry 300x18-0+0
 *DockTray: Colorset 20
 *DockTray: BoxSize smart
 *DockTray: Rows 1

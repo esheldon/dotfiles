@@ -1,0 +1,17 @@
+[colors.primary]
+foreground = "#fffbe5"
+background = "#1f1f1f"
+
+[colors.normal]
+red = "#ff6600"
+green = "#99ff99"
+yellow = "#ffff66"
+blue = "#99ccff"
+magenta = "#dda0dd"  # plum
+
+[colors.bright]
+red = "#ff6600"
+green = "#99ff99"
+yellow = "#ffff66"
+blue = "#99ccff"
+magenta = "#ff6699"

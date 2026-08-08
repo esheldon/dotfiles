@@ -6,12 +6,12 @@
 *.mod
 .deps
 *.dep
-*.lock
 *.rlib
 *.dll
 *.exe
 *egg-info
 tags
+*__pycache__*
 
 /build/
 /target/
@@ -22,3 +22,7 @@ nimcache
 .DS_Store
 
 .coverage
+
+**/.claude/settings.local.json
+
+**/.claude/settings.local.json

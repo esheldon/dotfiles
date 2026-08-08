@@ -1,3 +1,4 @@
 channels:
-    - conda-forge
-    - defaults
+  - conda-forge
+  - defaults
+default_threads: 1

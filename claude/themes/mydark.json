@@ -1,0 +1,81 @@
+{
+  "name": "mydark",
+  "base": "dark",
+  "overrides": {
+    "text": "ansi256(253)",
+    "subtle": "ansi256(245)",
+    "inactive": "ansi256(240)",
+    "inactiveShimmer": "ansi256(244)",
+    "inverseText": "ansi256(234)",
+
+    "claude": "ansi256(173)",
+    "claudeShimmer": "ansi256(215)",
+    "briefLabelClaude": "ansi256(173)",
+    "briefLabelYou": "ansi256(109)",
+
+    "claudeBlue_FOR_SYSTEM_SPINNER": "ansi256(109)",
+    "claudeBlueShimmer_FOR_SYSTEM_SPINNER": "ansi256(116)",
+
+    "promptBorder": "ansi256(108)",
+    "promptBorderShimmer": "ansi256(151)",
+    "bashBorder": "ansi256(174)",
+
+    "permission": "ansi256(109)",
+    "permissionShimmer": "ansi256(116)",
+    "suggestion": "ansi256(109)",
+    "remember": "ansi256(109)",
+    "professionalBlue": "ansi256(109)",
+    "ide": "ansi256(109)",
+
+    "autoAccept": "ansi256(140)",
+    "merged": "ansi256(140)",
+    "planMode": "ansi256(72)",
+
+    "fastMode": "ansi256(173)",
+    "fastModeShimmer": "ansi256(215)",
+
+    "error": "ansi256(167)",
+    "warning": "ansi256(179)",
+    "warningShimmer": "ansi256(186)",
+    "success": "ansi256(108)",
+
+    "chromeYellow": "ansi256(186)",
+
+    "diffAdded": "ansi256(108)",
+    "diffAddedDimmed": "ansi256(65)",
+    "diffAddedWord": "ansi256(151)",
+    "diffRemoved": "ansi256(174)",
+    "diffRemovedDimmed": "ansi256(95)",
+    "diffRemovedWord": "ansi256(181)",
+
+    "rate_limit_empty": "ansi256(238)",
+    "rate_limit_fill": "ansi256(116)",
+
+    "blue_FOR_SUBAGENTS_ONLY": "ansi256(109)",
+    "cyan_FOR_SUBAGENTS_ONLY": "ansi256(116)",
+    "green_FOR_SUBAGENTS_ONLY": "ansi256(108)",
+    "orange_FOR_SUBAGENTS_ONLY": "ansi256(173)",
+    "pink_FOR_SUBAGENTS_ONLY": "ansi256(174)",
+    "purple_FOR_SUBAGENTS_ONLY": "ansi256(140)",
+    "red_FOR_SUBAGENTS_ONLY": "ansi256(167)",
+    "yellow_FOR_SUBAGENTS_ONLY": "ansi256(186)",
+
+    "rainbow_red": "ansi256(174)",
+    "rainbow_red_shimmer": "ansi256(181)",
+    "rainbow_orange": "ansi256(173)",
+    "rainbow_orange_shimmer": "ansi256(215)",
+    "rainbow_yellow": "ansi256(186)",
+    "rainbow_yellow_shimmer": "ansi256(222)",
+    "rainbow_green": "ansi256(108)",
+    "rainbow_green_shimmer": "ansi256(151)",
+    "rainbow_blue": "ansi256(109)",
+    "rainbow_blue_shimmer": "ansi256(116)",
+    "rainbow_indigo": "ansi256(103)",
+    "rainbow_indigo_shimmer": "ansi256(146)",
+    "rainbow_violet": "ansi256(140)",
+    "rainbow_violet_shimmer": "ansi256(146)",
+
+    "clawd_background": "ansi256(234)",
+    "clawd_body": "ansi256(173)"
+  }
+}
