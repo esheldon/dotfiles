@@ -4,8 +4,10 @@
 # backend: PDF
 
 text.usetex  : True
+# text.usetex  : False
 mathtext.fontset : cm
 font.family : serif
+# axes.unicode_minus: False
 
 xtick.top: True
 ytick.right: True
@@ -22,9 +24,9 @@ xtick.direction: in
 ytick.direction: in
 
 axes.formatter.use_mathtext: True
-axes.labelsize:18
-xtick.labelsize:16
-ytick.labelsize:16
+axes.labelsize: 18
+xtick.labelsize: 16
+ytick.labelsize: 16
 axes.xmargin: 0.1
 axes.ymargin: 0.1
 # figure.constrained_layout.use: True
@@ -44,3 +46,6 @@ errorbar.capsize: 2
 lines.linewidth: 1
 
 # axes.prop_cycle : cycler(color=['blue', 'red', 'orange'], marker=['o', 'd', '^'], linestyle=['solid', 'dashed', 'dotted'], linewidth=[1, 2, 3])
+
+# true type font
+pdf.fonttype:  42
