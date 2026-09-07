@@ -332,28 +332,36 @@ if executable('ruff')
     augroup END
 endif
 
-" Helper function for <F7>: Lint, clear previous, and handle no errors
+" Helper function for <F7>: show ruff's current diagnostics in the location list
 function! s:lint_on_demand() abort
-    let g:lsp_diagnostics_signs_enabled = 1
-    
-    " Clear previous diagnostics (loclist and signs)
-    call setloclist(0, [], 'r')  " Empty the location list
-    execute 'sign unplace * buffer=' . bufnr('%')
-    
-    " Request fresh diagnostics
-    call execute('LspDocumentDiagnostics')
-    
-    " Check if any diagnostics were found
-    let l:diags = getloclist(0)
-    if empty(l:diags)
-        lclose  " Close location list window if open
-        echo 'No errors found'
+    let l:src = win_getid()
+    " Drop this window's old list (and its window) so we don't stack up
+    " lists or leave stale entries behind when there are no new results.
+    lclose
+    call setloclist(0, [], 'f')
+    " vim-lsp fills this window's loclist and does 'botright lopen', which
+    " moves the cursor into the list; it echom's an error when there are no
+    " results.  'silent' hides that; errors from the server still show.
+    silent LspDocumentDiagnostics
+    " Come back to the source window so the cursor stays put.
+    call win_gotoid(l:src)
+    let l:n = len(getloclist(0))
+    if l:n == 0
+        echo 'ruff: no issues'
     else
-        echo 'Diagnostics updated (' . len(l:diags) . ' issues).'
-        " Optional: Auto-open location list
-        " lopen
+        echo 'ruff: ' . l:n . ' issue(s) - <CR> in the list jumps, :lclose hides it'
     endif
 endfunction
+
+" A location list belongs to the window it was created in.  If that window
+" is closed (:q, :close, <C-w>c) Vim leaves the list window open but
+" orphaned, and <CR> in it then takes over some other window.  Close the
+" list together with its owner.
+augroup ruff_loclist_cleanup
+    au!
+    autocmd WinClosed * if getwinvar(str2nr(expand('<amatch>')), '&buftype') ==# ''
+        \ | call win_execute(str2nr(expand('<amatch>')), 'lclose') | endif
+augroup END
 
 " Helper function for <F8> (unchanged)
 function! s:preview_and_format() abort
