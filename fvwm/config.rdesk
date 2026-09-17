@@ -15,7 +15,7 @@
 #   raise / lower      right click the title bar or a border
 #   window menu        left click the title bar's left button (double click closes)
 #   maximize           left click the title bar's right button
-#   iconify            window menu -> Iconify; click the icon to get it back
+#   minimize           the title bar's small square; click the icon to get it back
 #   applications       left click the desktop background
 #   window list        middle click the desktop background
 #   session menu       right click the desktop background
@@ -24,7 +24,7 @@
 # The pager is the only module used.
 ###################################
 
-InfoStoreAdd terminal st
+InfoStoreAdd terminal xterm
 ImagePath $HOME/.fvwm/icons:+
 CursorStyle "ROOT" "X_cursor"
 
@@ -179,8 +179,7 @@ AddToMenu Window-Ops2
 AddToMenu RootMenu
 +  " Workspace Menu "  Title
 +  "Terminal"          Exec exec $[infostore.terminal]
-# xterm comes from the host, so only offer it where it exists
-Test (x xterm) AddToMenu RootMenu "XTerm" Exec exec xterm
+Test (x xterm) AddToMenu RootMenu "xterm inconsolata" Exec exec xterm -fa Inconsolata:pixelsize=22
 AddToMenu RootMenu
 +  ""                  Nop
 +  "Window List"       WindowList
