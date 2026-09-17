@@ -1,0 +1,12 @@
+[global]
+target = "~/local/bin"
+upgrade_only = true
+
+["sharkdp/bat"]
+asset_filters = ["x86_64", "musl"]
+target = "~/local/bin/bat"
+
+# this doesn't have gpu support
+["aristocratos/btop"]
+asset_filters = ["x86_64", "musl"]
+target = "~/local/bin/btop"
