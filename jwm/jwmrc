@@ -23,7 +23,7 @@
       Mod+m                maximize the window (toggle)
       Mod+f                fullscreen the window (toggle)
       Mod+Shift+c          close the window
-      Mod+1..9             view a desktop; again to go back to the last one
+      Mod+1..9             view a desktop
       Mod+Shift+1..9       send the window to a desktop
       Mod+Shift+0          show the window on all desktops (toggle)
       Mod+Shift+q          quit
@@ -32,14 +32,12 @@
 
     JWM is a stacking window manager, so dwm's layouts have no counterpart:
     Mod+t, Mod+space and Mod+Shift+space (layouts and floating), Mod+Return
-    (zoom), Mod+i and Mod+d (the master area) and Mod+0 (view all tags) are
-    left unbound.  Mod+h and Mod+l resize the master area in dwm; here they
-    snap a window to half of the screen.  Mod+f is the floating layout in
-    dwm; here, where every window floats, it is fullscreen.  Two more
-    differences: Mod+Shift+1..9 follows the window to its new desktop, as
-    JWM's send action does, where dwm stays put; and pressing Mod with the
-    number of the current desktop returns to the previous one
-    (backandforth, below), which does the job of dwm's Mod+Tab.
+    (zoom), Mod+i and Mod+d (the master area), Mod+0 (view all tags) and
+    Mod+Tab (the previous tags) are left unbound.  Mod+h and Mod+l resize the
+    master area in dwm; here they snap a window to half of the screen.
+    Mod+f is the floating layout in dwm; here, where every window floats, it
+    is fullscreen.  One more difference: Mod+Shift+1..9 follows the window
+    to its new desktop, as JWM's send action does, where dwm stays put.
 
     A few bindings keep JWM's own features within reach:
 
@@ -224,10 +222,11 @@
     </IconPath>
 
     <!-- Virtual Desktops -->
-    <!-- Nine desktops, one for each of dwm's tags.  With backandforth on,
-         switching to the current desktop goes back to the previous one.
+    <!-- Nine desktops, one for each of dwm's tags.  With backandforth off,
+         switching to the current desktop stays put, as in dwm; with it on,
+         it goes back to the previous desktop.
          Desktop tags can be contained within Desktops for desktop names. -->
-    <Desktops width="9" height="1" backandforth="on">
+    <Desktops width="9" height="1" backandforth="off">
         <!-- Default background. Note that a Background tag can be
               contained within a Desktop tag to give a specific background
               for that desktop.  See the top of this file about xsetroot.
