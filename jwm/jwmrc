@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<!--
+    .jwmrc - JWM configuration with dwm-like key bindings
+
+    Based on JWM's stock configuration (example.jwmrc from JWM 2.4.6)
+    with subdued colors
+
+      active window        beige on #5d594d
+      inactive windows     Gainsboro on Gray20
+      bottom bar           as the windows; minimized windows Gray60
+      pager                #5d594d desks, #7e7a5c for the current one
+      menus                same as inactive window
+      desktop background   grey15
+
+    The key bindings follow dwm's defaults, with Alt (Mod1, dwm's own
+    default) as the modifier.  JWM's nine desktops stand in for dwm's tags:
+
+      Mod+p                dmenu_run
+      Mod+Shift+Return     terminal (st)
+      Mod+b                show the tray
+      Mod+j / Mod+k        focus the next / previous window
+      Mod+h / Mod+l        snap the window to the left / right half
+      Mod+m                maximize the window (toggle)
+      Mod+f                fullscreen the window (toggle)
+      Mod+Shift+c          close the window
+      Mod+1..9             view a desktop; again to go back to the last one
+      Mod+Shift+1..9       send the window to a desktop
+      Mod+Shift+0          show the window on all desktops (toggle)
+      Mod+Shift+q          quit
+      Mod+button1          move the window
+      Mod+button3          resize the window
+
+    JWM is a stacking window manager, so dwm's layouts have no counterpart:
+    Mod+t, Mod+space and Mod+Shift+space (layouts and floating), Mod+Return
+    (zoom), Mod+i and Mod+d (the master area) and Mod+0 (view all tags) are
+    left unbound.  Mod+h and Mod+l resize the master area in dwm; here they
+    snap a window to half of the screen.  Mod+f is the floating layout in
+    dwm; here, where every window floats, it is fullscreen.  Two more
+    differences: Mod+Shift+1..9 follows the window to its new desktop, as
+    JWM's send action does, where dwm stays put; and pressing Mod with the
+    number of the current desktop returns to the previous one
+    (backandforth, below), which does the job of dwm's Mod+Tab.
+
+    A few bindings keep JWM's own features within reach:
+
+      Mod+Escape           the root menu
+      Mod+w                the window menu
+      Mod+Left / Right     the desktop to the left / right
+      Mod+Shift+r          restart JWM (to reread this file)
+
+    The clock uses "%I" rather than "%l", which musl, the C library rdesk's
+    programs are built with, does not support: the clock was blank.
+
+    JWM sets the desktop background each time it starts, and it restarts
+    itself when the desktop is resized, so a colour set with xsetroot lasts
+    only until the next resize.  To manage the background yourself, remove the
+    Background tag below, or have JWM run your command for it:
+      <Background type="command">xsetroot -solid steelblue</Background>
+
+    Check this file with "jwm -p" before restarting JWM.
+
+    The stock configuration is part of JWM, whose license follows.
+
+    MIT License
+
+    Copyright (c) 2016 Joe Wingbermuehle
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+-->
+<JWM>
+
+    <!-- The root menu. -->
+    <RootMenu onroot="12">
+        <Program icon="utilities-terminal" label="Alacritty">alacritty</Program>
+        <Program icon="utilities-terminal" label="XTerm">xterm</Program>
+        <Separator/>
+        <Restart label="Restart" icon="reload"/>
+        <Exit label="Exit" confirm="true" icon="exit"/>
+    </RootMenu>
+
+    <!-- Options for program groups. -->
+    <Group>
+        <Option>tiled</Option>
+    </Group>
+    <Group>
+        <Name>xterm</Name>
+        <Option>vmax</Option>
+    </Group>
+    <Group>
+        <!-- st gives its windows the name and class st-256color, after TERM -->
+        <Class>st</Class>
+        <Option>vmax</Option>
+    </Group>
+    <Group>
+        <Name>xclock</Name>
+        <Option>drag</Option>
+        <Option>notitle</Option>
+    </Group>
+
+    <!-- Tray at the bottom. -->
+    <Tray x="0" y="-1" autohide="off" delay="1000">
+
+        <TrayButton label="Menu">root:1</TrayButton>
+        <Spacer width="2"/>
+        <TrayButton label="_">showdesktop</TrayButton>
+        <Spacer width="2"/>
+
+        <Pager labeled="true"/>
+
+        <TaskList maxwidth="256"/>
+
+        <!-- <Swallow width="32" height="32" name="xclock">xclock</Swallow> -->
+
+        <Dock/>
+        <Clock format="%I:%M %p"><Button mask="123">exec:xclock</Button></Clock>
+
+    </Tray>
+
+    <!-- Visual Styles -->
+    <WindowStyle decorations="motif">
+        <Font>Sans-10</Font>
+        <Width>4</Width>
+        <Corner>0</Corner>
+        <Foreground>#DCDCDC</Foreground>        <!-- Gainsboro -->
+        <Background>#333333</Background>        <!-- Gray20 -->
+        <Opacity>0.5</Opacity>
+        <Active>
+            <Foreground>#F5F5DC</Foreground>    <!-- beige -->
+            <Background>#5D594D</Background>
+            <Opacity>1.0</Opacity>
+        </Active>
+    </WindowStyle>
+
+    <TrayStyle decorations="motif">
+        <Font>Sans-10</Font>
+        <Background>#333333</Background>        <!-- Gray20 -->
+        <Foreground>#DCDCDC</Foreground>        <!-- Gainsboro -->
+        <Opacity>0.75</Opacity>
+        <Active>
+            <Foreground>#FFFFFF</Foreground>    <!-- white -->
+            <Background>#595959</Background>    <!-- Gray35 -->
+        </Active>
+    </TrayStyle>
+
+    <TaskListStyle list="all" group="true">
+      <Font>Sans-10</Font>
+      <Active>
+        <Foreground>#F5F5DC</Foreground>        <!-- beige -->
+        <Background>#5D594D</Background>
+      </Active>
+      <Minimized>
+        <Foreground>#999999</Foreground>        <!-- Gray60 -->
+        <Background>#333333</Background>        <!-- Gray20 -->
+      </Minimized>
+      <Foreground>#DCDCDC</Foreground>          <!-- Gainsboro -->
+      <Background>#333333</Background>          <!-- Gray20 -->
+    </TaskListStyle>
+
+    <PagerStyle>
+        <Outline>#000000</Outline>
+        <Foreground>#333333</Foreground>        <!-- windows: Gray20 -->
+        <Background>#5D594D</Background>        <!-- desks -->
+        <Text>#000000</Text>
+        <Active>
+            <Foreground>#5D594D</Foreground>    <!-- the active window -->
+            <Background>#7E7A5C</Background>    <!-- the current desk -->
+        </Active>
+    </PagerStyle>
+
+    <MenuStyle decorations="motif">
+        <Font>Sans-10</Font>
+        <Foreground>#DCDCDC</Foreground>        <!-- Gainsboro -->
+        <Background>#333333</Background>        <!-- Gray20 -->
+        <Active>
+            <Foreground>#FFFFFF</Foreground>    <!-- white -->
+            <Background>#36648B</Background>    <!-- SteelBlue4 -->
+        </Active>
+        <Opacity>0.85</Opacity>
+    </MenuStyle>
+
+    <PopupStyle>
+        <Font>Sans-10</Font>
+        <Foreground>#000000</Foreground>
+        <Background>#999999</Background>
+    </PopupStyle>
+
+    <!-- Path where icons can be found.
+         IconPath can be listed multiple times to allow searching
+         for icons in multiple paths.
+      -->
+    <IconPath>
+      /usr/local/share/icons/Tango/scalable/actions
+    </IconPath>
+    <IconPath>
+      /usr/local/share/icons/Tango/scalable/apps
+    </IconPath>
+    <IconPath>
+      /usr/local/share/icons/Tango/scalable/places
+    </IconPath>
+    <IconPath>
+      /usr/local/share/icons/Tango/scalable/status
+    </IconPath>
+    <IconPath>
+      /usr/local/share/icons/Tango/scalable/mimetypes
+    </IconPath>
+    <IconPath>
+      /usr/local/share/jwm
+    </IconPath>
+
+    <!-- Virtual Desktops -->
+    <!-- Nine desktops, one for each of dwm's tags.  With backandforth on,
+         switching to the current desktop goes back to the previous one.
+         Desktop tags can be contained within Desktops for desktop names. -->
+    <Desktops width="9" height="1" backandforth="on">
+        <!-- Default background. Note that a Background tag can be
+              contained within a Desktop tag to give a specific background
+              for that desktop.  See the top of this file about xsetroot.
+         -->
+        <!-- <Background type="solid">grey15</Background> -->
+        <Background type="command">feh --no-fehbg --bg-fill /home/esheldon/git/misc/images/wallpapers/cg/flightplan-r-1920.gif</Background>
+    </Desktops>
+
+    <!-- Double click speed (in milliseconds) -->
+    <DoubleClickSpeed>400</DoubleClickSpeed>
+
+    <!-- Double click delta (in pixels) -->
+    <DoubleClickDelta>2</DoubleClickDelta>
+
+    <!-- The focus model (sloppy or click) -->
+    <FocusModel>sloppy</FocusModel>
+
+    <!-- The snap mode (none, screen, or border) -->
+    <SnapMode distance="10">border</SnapMode>
+
+    <!-- The move mode (outline or opaque).  The mask is the modifier for
+         moving (button 1) and resizing (button 3) a window from anywhere
+         inside it: Alt, the same modifier as the key bindings. -->
+    <MoveMode mask="A">opaque</MoveMode>
+
+    <!-- The resize mode (outline or opaque) -->
+    <ResizeMode>opaque</ResizeMode>
+
+    <!-- Key bindings -->
+
+    <!-- Menu navigation -->
+    <Key key="Up">up</Key>
+    <Key key="Down">down</Key>
+    <Key key="Right">right</Key>
+    <Key key="Left">left</Key>
+    <Key key="h">left</Key>
+    <Key key="j">down</Key>
+    <Key key="k">up</Key>
+    <Key key="l">right</Key>
+    <Key key="Return">select</Key>
+    <Key key="Escape">escape</Key>
+
+    <!-- dwm's bindings; mask A is Alt (Mod1), S is Shift.  For the
+         Super key instead, change each A to 4 (Mod4). -->
+    <Key mask="A" key="p">exec:dmenu_run</Key>
+    <Key mask="AS" key="Return">exec:alacritty</Key>
+    <Key mask="A" key="b">showtray</Key>
+    <Key mask="A" key="j">next</Key>
+    <Key mask="A" key="k">prev</Key>
+    <Key mask="A" key="h">maxleft</Key>
+    <Key mask="A" key="l">maxright</Key>
+    <Key mask="A" key="m">maximize</Key>
+    <Key mask="A" key="f">fullscreen</Key>
+    <Key mask="AS" key="c">close</Key>
+    <Key mask="A" key="#">desktop#</Key>
+    <Key mask="AS" key="#">send#</Key>
+    <Key mask="AS" key="0">stick</Key>
+    <Key mask="AS" key="q">exit</Key>
+
+    <!-- JWM's own -->
+    <Key mask="A" key="Escape">root:1</Key>
+    <Key mask="A" key="w">window</Key>
+    <Key mask="A" key="Right">rdesktop</Key>
+    <Key mask="A" key="Left">ldesktop</Key>
+    <Key mask="AS" key="r">restart</Key>
+
+    <!-- Mouse bindings -->
+    <Mouse context="root" button="4">ldesktop</Mouse>
+    <Mouse context="root" button="5">rdesktop</Mouse>
+
+    <Mouse context="title" button="1">move</Mouse>
+    <Mouse context="title" button="2">move</Mouse>
+    <Mouse context="title" button="3">window</Mouse>
+    <Mouse context="title" button="4">shade</Mouse>
+    <Mouse context="title" button="5">shade</Mouse>
+    <Mouse context="title" button="11">maximize</Mouse>
+
+    <Mouse context="icon" button="1">window</Mouse>
+    <Mouse context="icon" button="2">move</Mouse>
+    <Mouse context="icon" button="3">window</Mouse>
+    <Mouse context="icon" button="4">shade</Mouse>
+    <Mouse context="icon" button="5">shade</Mouse>
+
+    <Mouse context="border" button="1">resize</Mouse>
+    <Mouse context="border" button="2">move</Mouse>
+    <Mouse context="border" button="3">window</Mouse>
+
+    <Mouse context="close" button="-1">close</Mouse>
+    <Mouse context="close" button="2">move</Mouse>
+    <Mouse context="close" button="-3">close</Mouse>
+
+    <Mouse context="maximize" button="-1">maximize</Mouse>
+    <Mouse context="maximize" button="-2">maxv</Mouse>
+    <Mouse context="maximize" button="-3">maxh</Mouse>
+
+    <Mouse context="minimize" button="-1">minimize</Mouse>
+    <Mouse context="minimize" button="2">move</Mouse>
+    <Mouse context="minimize" button="-3">shade</Mouse>
+
+</JWM>
