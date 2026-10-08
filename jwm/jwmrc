@@ -85,8 +85,9 @@
 
     <!-- The root menu. -->
     <RootMenu onroot="12">
-        <Program icon="utilities-terminal" label="Alacritty">alacritty</Program>
         <Program icon="utilities-terminal" label="XTerm">xterm</Program>
+        <!-- need fixed scale for alacritty for moving between different res monitors -->
+        <Program icon="utilities-terminal" label="Alacritty">env WINIT_X11_SCALE_FACTOR=1.7 alacritty</Program>
         <Separator/>
         <Restart label="Restart" icon="reload"/>
         <Exit label="Exit" confirm="true" icon="exit"/>
@@ -255,10 +256,17 @@
     <!-- The snap mode (none, screen, or border) -->
     <SnapMode distance="10">border</SnapMode>
 
-    <!-- The move mode (outline or opaque).  The mask is the modifier for
-         moving (button 1) and resizing (button 3) a window from anywhere
-         inside it: Alt, the same modifier as the key bindings. -->
-    <MoveMode mask="A">opaque</MoveMode>
+    <!--
+
+        The move mode (outline or opaque). The mask is the modifier for
+        moving (button 1) and resizing (button 3) a window from anywhere
+        inside it: Alt, the same modifier as the key bindings.
+
+        delay="0" turns off desktop switching at the edge.  Has advantage
+        of covering a bug in jwm when using alt-leftmouse to move
+
+    -->
+    <MoveMode mask="A" delay="0">opaque</MoveMode>
 
     <!-- The resize mode (outline or opaque) -->
     <ResizeMode>opaque</ResizeMode>
@@ -280,7 +288,7 @@
     <!-- dwm's bindings; mask A is Alt (Mod1), S is Shift.  For the
          Super key instead, change each A to 4 (Mod4). -->
     <Key mask="A" key="p">exec:dmenu_run</Key>
-    <Key mask="AS" key="Return">exec:alacritty</Key>
+    <Key mask="AS" key="Return">exec:xterm</Key>
     <Key mask="A" key="b">showtray</Key>
     <Key mask="A" key="j">next</Key>
     <Key mask="A" key="k">prev</Key>
