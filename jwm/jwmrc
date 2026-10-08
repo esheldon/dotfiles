@@ -112,7 +112,7 @@
     </Group>
 
     <!-- Tray at the bottom. -->
-    <Tray x="0" y="-1" autohide="off" delay="1000">
+    <Tray x="0" y="0" autohide="off" delay="1000">
 
         <TrayButton label="Menu">root:1</TrayButton>
         <Spacer width="2"/>
@@ -156,7 +156,15 @@
         </Active>
     </TrayStyle>
 
-    <TaskListStyle list="all" group="true">
+    <!--
+        group="false": one task button per window.  Mod+j and Mod+k (next
+        and prev) step through task buttons, so grouping windows of the
+        same program would have them skip all but one of those windows.
+
+        list="desktop" only show tasks on current desktop, set to "all"
+        to show all tasks
+    -->
+    <TaskListStyle list="desktop" group="false">
       <Font>Sans-10</Font>
       <Active>
         <Foreground>#F5F5DC</Foreground>        <!-- beige -->
