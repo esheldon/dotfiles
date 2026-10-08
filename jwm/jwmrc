@@ -126,7 +126,7 @@
         <!-- <Swallow width="32" height="32" name="xclock">xclock</Swallow> -->
 
         <Dock/>
-        <Clock format="%I:%M %p"><Button mask="123">exec:xclock</Button></Clock>
+        <Clock format="%m/%d %I:%M %p"><Button mask="123">exec:xclock</Button></Clock>
 
     </Tray>
 
